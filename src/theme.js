@@ -1,27 +1,26 @@
 import {createTheme, LightTheme, lightThemePrimitives} from 'baseui'
 
-const Theme = createTheme(
-  {
-    ...lightThemePrimitives,
-    primaryFontFamily: "'Raleway', sans-serif"
+export const overrides = {
+  colors: {
+    primary: '#3079ff',
+    header: '#4b4b4b',
+    background: '#f9f9f9'
   },
-  {
-    colors: {
-      primary: '#3079ff',
-      header: '#4b4b4b',
-      background: '#f9f9f9'
-    },
-    typography: {
-      lightFont500: {
-        ...LightTheme.typography.font500,
-        fontWeight: 'normal'
-      },
-      sublanding: {
-        ...LightTheme.typography.font700,
-        fontFamily: "'Fredoka One', cursive"
-      }
+  typography: {
+    ...LightTheme.typography,
+    menu: {
+      ...LightTheme.typography.font400
+    }
+  },
+  layout: {
+    content: {
+      width: '60rem',
+      marginLeft: 'auto',
+      marginRight: 'auto'
     }
   }
-)
+}
+
+const Theme = createTheme(lightThemePrimitives, overrides)
 
 export default Theme

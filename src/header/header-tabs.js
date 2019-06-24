@@ -1,5 +1,7 @@
 import React from 'react'
 import {Tabs, Tab} from 'baseui/tabs'
+import {TabBar} from 'baseui/tabs/styled-components'
+import {Content} from 'tidbits/layout/content'
 
 export function HeaderTabs({tabs, activeTab, onChange}) {
   return (
@@ -7,10 +9,16 @@ export function HeaderTabs({tabs, activeTab, onChange}) {
       activeKey={`${activeTab}`}
       onChange={({activeKey}) => onChange(activeKey)}
       overrides={{
-        TabBar: {
+        Root: {
           style: {
             backgroundColor: 'white',
             boxShadow: '0 2px 4px 0 rgba(204,204,204,0.5)'
+          }
+        },
+        TabBar: {
+          component: ContentTabBar,
+          style: {
+            backgroundColor: 'white'
           }
         },
         Tab: {
@@ -32,16 +40,27 @@ export function HeaderTabs({tabs, activeTab, onChange}) {
             title={tab}
             overrides={{
               Tab: {
-                style: {
+                style: ({$theme}) => ({
+                  ...$theme.typography.menu,
                   backgroundColor: 'white',
                   paddingTop: '.5em',
                   paddingBottom: '.5em'
-                }
+                })
               }
             }}
           />
         ))
       }
     </Tabs>
+  )
+}
+
+function ContentTabBar({children, ...props}) {
+  return (
+    <Content>
+      <TabBar {...props}>
+        {children}
+      </TabBar>
+    </Content>
   )
 }
