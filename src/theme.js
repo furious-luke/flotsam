@@ -14,9 +14,15 @@ export const overrides = {
   },
   layout: {
     content: {
-      width: '60rem',
+      width: '61rem',
       marginLeft: 'auto',
       marginRight: 'auto'
+    },
+    primaryContent: {
+      width: '40rem'
+    },
+    secondaryContent: {
+      width: '20rem'
     }
   }
 }
