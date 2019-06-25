@@ -17,7 +17,9 @@ export function List({items, onSelect, contextMenu}) {
         ListItem: {
           component: ListItem,
           style: {
-            width: '100%'
+            width: '100%',
+            height: '2em',
+            lineHeight: '2em'
           },
           props: {
             contextMenu

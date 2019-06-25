@@ -6,7 +6,14 @@ import {SplitContent} from './split-content'
 
 storiesOf('Layout/SplitContent', module)
   .addDecorator(BackgroundDecorator)
-  .add('Default', () => (
+  .add('Single items', () => (
+    <SplitContent>
+      <Card>
+        <h1>Primary</h1>
+      </Card>
+    </SplitContent>
+  ))
+  .add('Several rows', () => (
     <SplitContent>
       <Card>
         <h1>Primary</h1>

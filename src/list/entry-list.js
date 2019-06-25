@@ -36,11 +36,51 @@ export function EntryList({
       onChange={({oldIndex, newIndex}) => {}}
       overrides={{
         Item: {
-          component: Item,
+          props: {
+            onKeyDown: null,
+            $listLength: itemsWithPlaceholder.length,
+            tabindex: -1
+          },
+          style: ({$index, $listLength}) => ({
+            ':hover': 'none',
+            paddingTop: 0,
+            paddingRight: 0,
+            paddingBottom: 0,
+            paddingLeft: 0,
+            ...(($index == $listLength - 1) ? {boxShadow: null} : {}),
+            ...(($index == $listLength - 1) ? {
+              borderTopColor: 'transparent',
+              borderRightColor: 'transparent',
+              borderBottomColor: 'transparent',
+              borderLeftColor: 'transparent'
+            } : {}),
+            ...(($index == $listLength - 1) ? {cursor: 'default'} : {})
+          })
+        },
+        Label: {
+          component: Label,
           props: {
             onChange: handleChangeEntry,
-            listLength: itemsWithPlaceholder.length
+            $listLength: itemsWithPlaceholder.length
           }
+        },
+        DragHandle: {
+          props: {
+            $listLength: itemsWithPlaceholder.length
+          },
+          style: ({$listLength, $index}) => ({
+            visibility: ($index == $listLength - 1) ? 'hidden' : null
+          })
+        },
+        CloseHandle: {
+          props: {
+            $listLength: itemsWithPlaceholder.length,
+            tabindex: -1
+          },
+          style: ({$listLength, $index}) => ({
+            visibility: ($index == $listLength - 1) ? 'hidden' : null,
+            ...(($index == $listLength - 1) ? {onClick: null} : {})
+          })
         }
       }}
     />
@@ -51,29 +91,53 @@ function isItemEmpty(item) {
   return !item || !item.content
 }
 
-function Item({$value, onChange, listLength, ...props}) {
+function Label({$value, onChange, $listLength, ...props}) {
+  return (
+    <TextInput
+      {...props}
+      key={$value.id}
+      value={$value.content}
+      placeholder={(props.$index == $listLength - 1) ? 'Add a new item' : null}
+      onChange={handleEvent(onChange, props.$index)}
+    />
+  )
+}
+
+function Item({$value, onChange, $listLength, ...props}) {
+  const sharedProps = {
+    $isRemovable: props.$isRemovable,
+    $isDragged: props.$isDragged,
+    $isSelected: props.$isSelected,
+    $index: props.$index,
+    $value
+  }
   return (
     <Block
+      {...props}
       key={$value.id}
-      display="flex"
       alignItems="center"
       padding=".2rem"
-      {...props}
     >
-      <DragHandle {...props}>
+      <DragHandle
+        {...sharedProps}
+        $style={{
+          flexShrink: 0
+        }}
+      >
         {
-          (props.$index != listLength - 1) && (
+          (props.$index != $listLength - 1) && (
             <Grab size={24} color="#CCC" />
           )
         }
       </DragHandle>
       <TextInput
+        {...sharedProps}
         key={$value.id}
         value={$value.content}
-        placeholder={(props.$index == listLength - 1) ? 'Add a new item' : null}
+        placeholder={(props.$index == $listLength - 1) ? 'Add a new item' : null}
         onChange={handleEvent(onChange, props.$index)}
       />
-      <CloseHandle>
+      <CloseHandle {...sharedProps}>
         <Delete size={24} color="#CCC" />
       </CloseHandle>
     </Block>
