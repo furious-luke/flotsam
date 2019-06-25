@@ -1,13 +1,24 @@
 import React from 'react'
+import useReactRouter from 'use-react-router'
 import {Tabs, Tab} from 'baseui/tabs'
 import {TabBar} from 'baseui/tabs/styled-components'
 import {Content} from 'tidbits/layout/content'
 
 export function HeaderTabs({tabs, activeTab, onChange}) {
+  const {history} = useReactRouter()
+  function handleTabChange({activeKey}) {
+    const tab = tabs[Number(activeKey)]
+    if (tab.link) {
+      history.push(tab.link)
+    }
+    if (onChange) {
+      onChange(activeKey)
+    }
+  }
   return (
     <Tabs
       activeKey={`${activeTab}`}
-      onChange={({activeKey}) => onChange(activeKey)}
+      onChange={handleTabChange}
       overrides={{
         Root: {
           style: {
@@ -34,10 +45,10 @@ export function HeaderTabs({tabs, activeTab, onChange}) {
       }}
     >
       {
-        tabs.map((tab, index) => (
+        tabs.map(({title}, index) => (
           <Tab
             key={index}
-            title={tab}
+            title={title}
             overrides={{
               Tab: {
                 style: ({$theme}) => ({

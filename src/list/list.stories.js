@@ -1,5 +1,6 @@
 import React from 'react'
 import {storiesOf} from '@storybook/react'
+import {StatefulMenu} from 'baseui/menu'
 import {ShortDecorator} from 'tidbits/helpers'
 import {List} from './list'
 
@@ -15,8 +16,23 @@ const items = [
   }
 ]
 
+function TestMenu() {
+  return (
+    <StatefulMenu
+      items={items}
+      overrides={{
+        List: {
+          style: {
+            width: '10em'
+          }
+        }
+      }}
+    />
+  )
+}
+
 storiesOf('List', module)
   .addDecorator(ShortDecorator)
   .add('Items with label', () => (
-    <List items={items} />
+    <List items={items} contextMenu={TestMenu} />
   ))

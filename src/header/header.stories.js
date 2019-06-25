@@ -4,7 +4,14 @@ import {Stateful, BackgroundDecorator} from 'tidbits/helpers'
 import {styled} from 'baseui'
 import {Header} from './header'
 
-const tabs = ['Tab 1', 'Tab 2']
+const tabs = [
+  {
+    title: 'Tab 1'
+  },
+  {
+    title: 'Tab 2'
+  }
+]
 
 const StyledDiv = styled('div', {
   display: 'flex',

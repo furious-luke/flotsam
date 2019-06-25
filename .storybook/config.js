@@ -1,5 +1,6 @@
 import React from 'react'
 import {configure, addDecorator} from '@storybook/react'
+import StoryRouter from 'storybook-react-router'
 import {Provider as StyletronProvider} from 'styletron-react'
 import {Client as Styletron} from 'styletron-engine-atomic'
 import {ThemeProvider} from 'baseui'
@@ -12,6 +13,8 @@ function requireAll(requireContext) {
 function loadStories() {
   requireAll(require.context('../src/', true, /.stories\.js$/))
 }
+
+addDecorator(StoryRouter())
 
 const engine = new Styletron()
 
