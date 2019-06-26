@@ -1,8 +1,10 @@
 import React from 'react'
 import {storiesOf} from '@storybook/react'
+import {Block} from 'baseui/block'
 import {Card} from 'baseui/card'
 import {BackgroundDecorator} from 'tidbits/helpers'
 import {SplitContent} from './split-content'
+import {VerticalSpacer} from './vertical-spacer'
 
 storiesOf('Layout/SplitContent', module)
   .addDecorator(BackgroundDecorator)
@@ -27,5 +29,22 @@ storiesOf('Layout/SplitContent', module)
       <Card>
         <h2>Secondary</h2>
       </Card>
+    </SplitContent>
+  ))
+  .add('Blocked columns', () => (
+    <SplitContent>
+      <VerticalSpacer>
+        <Card>
+          <h1>Primary</h1>
+        </Card>
+        <Card>
+          <h1>Primary</h1>
+        </Card>
+      </VerticalSpacer>
+      <VerticalSpacer>
+        <Card>
+          <h2>Secondary</h2>
+        </Card>
+      </VerticalSpacer>
     </SplitContent>
   ))

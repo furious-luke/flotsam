@@ -24,6 +24,9 @@ export const overrides = {
     secondaryContent: {
       width: '20rem'
     }
+  },
+  sizing: {
+    separation: '1rem'
   }
 }
 

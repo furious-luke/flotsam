@@ -29,8 +29,8 @@ export function SplitContent({children}) {
     <Content>
       <FlexGrid
         flexGridColumnCount={2}
-        flexGridColumnGap="1rem"
-        flexGridRowGap="1rem"
+        flexGridColumnGap="separation"
+        flexGridRowGap="separation"
       >
         {
           React.Children.map(

@@ -1,2 +1,3 @@
 export * from './content'
-export * from './primary-content'
+export * from './split-content'
+export * from './vertical-spacer'
