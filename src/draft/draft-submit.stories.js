@@ -1,10 +1,9 @@
 import React from 'react'
-import addSeconds from 'date-fns/addSeconds'
 import {storiesOf} from '@storybook/react'
 import {ShortDecorator} from 'tidbits/helpers'
 import {DraftSubmit} from './draft-submit'
 
-const lastUpdated = addSeconds(new Date(), -30)
+const lastUpdated = new Date('December 17, 1995 03:24:00')
 
 storiesOf('DraftSubmit', module)
   .addDecorator(ShortDecorator)
