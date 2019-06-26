@@ -23,6 +23,7 @@
     "css-loader": "^2.1.1",
     "find-package-json": "^1.2.0",
     "html-webpack-plugin": "^3.2.0",
+    "loki": "^0.17.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "peer-deps-externals-webpack-plugin": "^1.0.4",
     "storybook-react-router": "^1.0.5",
@@ -43,5 +44,21 @@
     "styletron-engine-atomic": "^1.4.0",
     "styletron-react": "^5.2.0",
     "use-react-router": "^1.0.7"
+  },
+  "loki": {
+    "configurations": {
+      "chrome.laptop": {
+        "target": "chrome.docker",
+        "width": 1366,
+        "height": 768,
+        "deviceScaleFactor": 1,
+        "mobile": false,
+        "fitWindow": false
+      },
+      "chrome.iphone7": {
+        "target": "chrome.docker",
+        "preset": "iPhone 7"
+      }
+    }
   }
 }

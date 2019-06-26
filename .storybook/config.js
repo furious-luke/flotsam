@@ -1,5 +1,6 @@
 import React from 'react'
 import {configure, addDecorator} from '@storybook/react'
+import 'loki/configure-react'
 import StoryRouter from 'storybook-react-router'
 import {Provider as StyletronProvider} from 'styletron-react'
 import {Client as Styletron} from 'styletron-engine-atomic'
