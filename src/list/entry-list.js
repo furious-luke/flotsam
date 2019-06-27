@@ -39,7 +39,7 @@ export function EntryList({
           props: {
             onKeyDown: null,
             $listLength: itemsWithPlaceholder.length,
-            tabindex: -1
+            tabIndex: -1
           },
           style: ({$index, $listLength}) => ({
             ':hover': 'none',
@@ -75,7 +75,7 @@ export function EntryList({
         CloseHandle: {
           props: {
             $listLength: itemsWithPlaceholder.length,
-            tabindex: -1
+            tabIndex: -1
           },
           style: ({$listLength, $index}) => ({
             visibility: ($index == $listLength - 1) ? 'hidden' : null,

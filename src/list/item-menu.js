@@ -14,7 +14,8 @@ export function ItemMenu({children}) {
       <Braille
         $style={{
           paddingLeft: '.5em',
-          paddingRight: '.5em'
+          paddingRight: '.5em',
+          cursor: 'pointer'
         }}
       />
     </StatefulPopover>

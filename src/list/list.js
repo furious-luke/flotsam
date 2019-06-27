@@ -1,46 +1,49 @@
 import React from 'react'
 import {Block} from 'baseui/block'
-import {StatefulMenu, StyledListItem} from 'baseui/menu'
+import {StatefulMenu, StyledList, StyledListItem} from 'baseui/menu'
 import {ItemMenu} from './item-menu'
 
-export function List({items, onSelect, contextMenu}) {
+export function List({items, ...props}) {
   return (
-    <StatefulMenu
-      items={items}
-      onItemSelect={onSelect}
-      overrides={{
-        List: {
-          style: {
-            boxShadow: 'none'
-          }
-        },
-        ListItem: {
-          component: ListItem,
-          style: {
-            width: '100%',
-            height: '2em',
-            lineHeight: '2em'
-          },
-          props: {
-            contextMenu
-          }
-        }
+    <StyledList
+      $style={{
+        display: 'block',
+        boxShadow: 'none'
       }}
-    />
+    >
+      {items.map(item => <ListItem {...props} item={item} />)}
+    </StyledList>
   )
 }
 
-function ListItem({children, contextMenu: ContextMenu, ...props}) {
+function ListItem({item, contextMenu: ContextMenu, ...props}) {
   return (
     <Block
       display="flex"
       alignItems="center"
       width="100%"
     >
-      <StyledListItem {...props}>{children}</StyledListItem>
-      <ItemMenu>
-        <ContextMenu />
-      </ItemMenu>
+      <StyledListItem
+        $style={({$theme}) => ({
+          ':hover': {
+            backgroundColor: $theme.colors.menuFillHover
+          },
+          flexGrow: 1,
+          paddingTop: '.8em',
+          paddingBottom: '.8em',
+          ...$theme.typography.font400
+        })}
+        {...props}
+      >
+        {item.label}
+      </StyledListItem>
+      {
+        ContextMenu && (
+          <ItemMenu>
+            <ContextMenu />
+          </ItemMenu>
+        )
+      }
     </Block>
   )
 }

@@ -99,6 +99,14 @@ export function isNil(value) {
   return value === undefined || value === null
 }
 
+export function notNil(value, defaultValue) {
+  if (isNil(value)) {
+    return defaultValue
+  } else {
+    return value
+  }
+}
+
 export function isEmpty(value) {
   return value === '' || isNil(value)
 }
@@ -139,4 +147,8 @@ export function arrayExtend(items, optionalItem) {
     ...items,
     ...(optionalItem ? [optionalItem] : [])
   ]
+}
+
+export function firstPathSegment(path) {
+  return path.slice(1, path.indexOf('/', 1)) || null
 }

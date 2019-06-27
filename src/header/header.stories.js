@@ -6,10 +6,12 @@ import {Header} from './header'
 
 const tabs = [
   {
-    title: 'Tab 1'
+    title: 'Tab 1',
+    link: '/tab1/'
   },
   {
-    title: 'Tab 2'
+    title: 'Tab 2',
+    link: '/tab2/'
   }
 ]
 

@@ -3,9 +3,11 @@ import useReactRouter from 'use-react-router'
 import {Tabs, Tab} from 'baseui/tabs'
 import {TabBar} from 'baseui/tabs/styled-components'
 import {Content} from 'tidbits/layout/content'
+import {firstPathSegment, notNil} from 'tidbits/utils'
 
-export function HeaderTabs({tabs, activeTab, onChange}) {
-  const {history} = useReactRouter()
+export function HeaderTabs({tabs, onChange, ...props}) {
+  const {history, location} = useReactRouter()
+  const activeTab = notNil(props.activeTab, findActiveTab(tabs, location.pathname))
   function handleTabChange({activeKey}) {
     const tab = tabs[Number(activeKey)]
     if (tab.link) {
@@ -74,4 +76,12 @@ function ContentTabBar({children, ...props}) {
       </TabBar>
     </Content>
   )
+}
+
+function findActiveTab(tabs, path) {
+  const pathSegment = firstPathSegment(path)
+  return tabs.findIndex(tab => {
+    const tabSegment = firstPathSegment(tab.link)
+    return tabSegment && tabSegment == pathSegment
+  })
 }
