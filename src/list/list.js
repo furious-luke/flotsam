@@ -3,17 +3,32 @@ import {Block} from 'baseui/block'
 import {StatefulMenu, StyledList, StyledListItem} from 'baseui/menu'
 import {ItemMenu} from './item-menu'
 
-export function List({items, ...props}) {
-  return (
-    <StyledList
-      $style={{
-        display: 'block',
-        boxShadow: 'none'
-      }}
-    >
-      {items.map(item => <ListItem {...props} item={item} />)}
-    </StyledList>
-  )
+export function List({items, emptyText, ...props}) {
+  if (items.length) {
+    return (
+      <StyledList
+        $style={{
+          display: 'block',
+          boxShadow: 'none'
+        }}
+      >
+        {items.map(item => <ListItem {...props} item={item} />)}
+      </StyledList>
+    )
+  } else {
+    return (
+      <Block
+        font="font400"
+        color="mono600"
+        display="flex"
+        justifyContent="center"
+        paddingTop="1rem"
+        paddingBottom="1rem"
+      >
+        <em>{emptyText || 'No items yet'}</em>
+      </Block>
+    )
+  }
 }
 
 function ListItem({item, contextMenu: ContextMenu, ...props}) {
