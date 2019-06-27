@@ -21,6 +21,7 @@ export function Status({status}) {
       alignItems="center"
       justifyContent="center"
       width="3rem"
+      height="1rem"
     >
       {Status && <Status />}
     </Block>
