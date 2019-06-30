@@ -21,7 +21,6 @@ export function Status({status}) {
       alignItems="center"
       justifyContent="center"
       width="3rem"
-      height="1rem"
     >
       {Status && <Status />}
     </Block>
@@ -34,7 +33,7 @@ function Loading() {
       display="flex"
       alignItems="center"
     >
-      <Spinner size="1.5em" />
+      <Spinner size="1.5rem" />
     </Block>
   )
 }
@@ -46,7 +45,7 @@ function Success() {
       alignItems="center"
       color="positive400"
     >
-      <Check size="1.5em" />
+      <Check size="1.5rem" />
     </Block>
   )
 }
@@ -58,7 +57,7 @@ function Failure() {
       alignItems="center"
       color="negative400"
     >
-      <Alert size="1.5em" />
+      <Alert size="1.5rem" />
     </Block>
   )
 }

@@ -14,7 +14,6 @@ export function Textarea({value, status, lastSaved, onChange, ...props}) {
         {...props}
       />
       <TextareaStatus status={status} lastSaved={lastSaved} />
-      <Block flex="1" />
     </Block>
   )
 }
