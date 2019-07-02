@@ -34,11 +34,6 @@ export function HeaderTabs({tabs, onChange, ...props}) {
             backgroundColor: 'white'
           }
         },
-        Tab: {
-          style: {
-            backgroundColor: 'white'
-          }
-        },
         TabContent: {
           style: {
             display: 'none'
@@ -57,7 +52,8 @@ export function HeaderTabs({tabs, onChange, ...props}) {
                   ...$theme.typography.menu,
                   backgroundColor: 'white',
                   paddingTop: '.5em',
-                  paddingBottom: '.5em'
+                  paddingBottom: '.5em',
+                  outline: 'none'
                 })
               }
             }}
