@@ -11,9 +11,22 @@ export function Textarea({value, status, lastSaved, onChange, ...props}) {
       <BaseTextarea
         value={value}
         onChange={handleEvent(onChange)}
+        overrides={{
+          InputContainer: {
+            style: {
+              display: 'block'
+            }
+          },
+          After: {
+            component: TextareaStatus,
+            props: {
+              status: status,
+              lastSaved: lastSaved
+            }
+          }
+        }}
         {...props}
       />
-      <TextareaStatus status={status} lastSaved={lastSaved} />
     </Block>
   )
 }
@@ -22,6 +35,7 @@ function TextareaStatus({status, lastSaved}) {
   return (
     <Block $style={{
       color: '#888',
+      height: '1.5rem',
       paddingTop: '.5em',
       paddingBottom: '.5em',
       paddingLeft: '.5em',
