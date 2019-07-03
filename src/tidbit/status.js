@@ -4,15 +4,21 @@ import {Spinner} from 'baseui/spinner'
 import Check from 'baseui/icon/check'
 import Alert from 'baseui/icon/alert'
 
+export const STATUS = {
+  loading: 'loading',
+  success: 'success',
+  failure: 'failure'
+}
+
 export function Status({status}) {
   let Status
-  if (status == 'loading') {
+  if (status == STATUS.loading) {
     Status = Loading
   }
-  if (status == 'failure') {
+  if (status == STATUS.failure) {
     Status = Failure
   }
-  if (status == 'success') {
+  if (status == STATUS.success) {
     Status = Success
   }
   return (

@@ -152,3 +152,7 @@ export function arrayExtend(items, optionalItem) {
 export function firstPathSegment(path) {
   return path.slice(1, path.indexOf('/', 1)) || null
 }
+
+export function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}

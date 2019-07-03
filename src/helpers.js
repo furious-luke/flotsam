@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import {styled} from 'baseui'
+import {sleep} from 'tidbits/utils'
 
 export function ShortDecorator(storyFn) {
   return (
@@ -27,21 +28,29 @@ export function Stateful({
   valueProp = 'value',
   onChangeProp = 'onChange',
   handleChange,
-  defaultValue
+  defaultValue = ''
 }) {
   const [value, setValue] = useState(defaultValue)
   let handler
   if (handleChange) {
     handler = (...args) => handleChange(value, setValue, ...args)
   } else {
-    handler = setValue
+    handler = payload => {
+      if (payload.value !== undefined) {
+        setValue(payload.value)
+      }
+    }
+  }
+  const controller = {
+    save: () => sleep(2000)
   }
   return (
     React.cloneElement(
       React.Children.only(children),
       {
         [valueProp]: value,
-        [onChangeProp]: handler
+        [onChangeProp]: handler,
+        controller
       }
     )
   )

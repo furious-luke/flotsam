@@ -1,19 +1,24 @@
 import React from 'react'
 import {storiesOf} from '@storybook/react'
-import {ShortDecorator} from 'tidbits/helpers'
+import {ShortDecorator, Stateful} from 'tidbits/helpers'
 import {TextInput} from './text-input'
 
 storiesOf('TextInput', module)
   .addDecorator(ShortDecorator)
+  .add('Demonstration', () => (
+    <Stateful>
+      <TextInput />
+    </Stateful>
+  ))
   .add('Empty', () => (
-    <TextInput />
+    <TextInput value="" />
   ))
   .add('Loading state', () => (
-    <TextInput status="loading" />
+    <TextInput value="" status="loading" />
   ))
   .add('Success state', () => (
-    <TextInput status="success" />
+    <TextInput value="" status="success" />
   ))
   .add('Failure state', () => (
-    <TextInput status="failure" />
+    <TextInput value="" status="failure" />
   ))
