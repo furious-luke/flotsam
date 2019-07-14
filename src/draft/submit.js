@@ -1,9 +1,10 @@
 import React from 'react'
 import {Block} from 'baseui/block'
 import {Button, SIZE} from 'baseui/button'
-import {DraftTimestamp} from './draft-timestamp'
+import {STATUS} from 'tidbits/utils/status'
 
-export function DraftSubmit({loading, disabled, lastUpdated}) {
+export function Submit({label, status, disabled, error, ...props}) {
+  const loading = status == STATUS.loading
   return (
     <Block
       display="flex"
@@ -12,14 +13,21 @@ export function DraftSubmit({loading, disabled, lastUpdated}) {
       marginBottom="2rem"
     >
       <Button
+        {...props}
         isLoading={loading}
         disabled={disabled || loading}
         size={SIZE.compact}
       >
-        Submit
+        {label || 'Submit'}
       </Button>
       <Block width="1rem" />
-      <DraftTimestamp value={lastUpdated} />
+      {
+        error && (
+          <Block color="negative">
+            {error}
+          </Block>
+        )
+      }
     </Block>
   )
 }

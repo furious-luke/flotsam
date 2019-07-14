@@ -41,16 +41,12 @@ export function Stateful({
       }
     }
   }
-  const controller = {
-    save: () => sleep(2000)
-  }
   return (
     React.cloneElement(
       React.Children.only(children),
       {
         [valueProp]: value,
-        [onChangeProp]: handler,
-        controller
+        [onChangeProp]: handler
       }
     )
   )

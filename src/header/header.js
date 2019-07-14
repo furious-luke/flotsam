@@ -6,10 +6,18 @@ import {
   StyledNavigationList as NavigationList,
 } from 'baseui/header-navigation'
 import {StyledLink as Link} from 'baseui/link'
-import {Avatar} from 'baseui/avatar'
+import {getOverrides} from 'baseui/helpers/overrides'
+import {AuthAvatar} from 'tidbits/auth-avatar'
 import {HeaderTabs} from './header-tabs'
 
-export function Header({logo: Logo, tabs, activeTab, onTabChange}) {
+export function Header({
+  logo: Logo,
+  tabs,
+  activeTab,
+  onTabChange,
+  overrides = {}
+}) {
+  const [Avatar, avatarProps] = getOverrides(overrides.Avatar, AuthAvatar)
   return (
     <React.Fragment>
       <HeaderNavigation
@@ -28,10 +36,7 @@ export function Header({logo: Logo, tabs, activeTab, onTabChange}) {
         <NavigationList $align={ALIGN.center} />
         <NavigationList $align={ALIGN.right}>
           <NavigationItem>
-            <Avatar
-              name="user"
-              size="scale1000"
-            />
+            <Avatar {...avatarProps} />
           </NavigationItem>
         </NavigationList>
       </HeaderNavigation>

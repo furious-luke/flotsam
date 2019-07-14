@@ -14,7 +14,8 @@ import {useArrayWithPlaceholder} from 'tidbits/hooks/array'
 export function EntryList({
   items = [],
   onChange,
-  itemFactory
+  itemFactory,
+  itemComponent = Label
 }) {
   const [itemsWithPlaceholder, createPlaceholder] = useArrayWithPlaceholder(
     items, itemFactory, isItemEmpty
@@ -58,7 +59,7 @@ export function EntryList({
           })
         },
         Label: {
-          component: Label,
+          component: itemComponent,
           props: {
             onChange: handleChangeEntry,
             $listLength: itemsWithPlaceholder.length

@@ -1,4 +1,4 @@
-import {parse, stringify} from 'flatted/esm'
+// import {parse, stringify} from 'flatted/esm'
 
 export function identity(value) {
   return value
@@ -111,13 +111,13 @@ export function isEmpty(value) {
   return value === '' || isNil(value)
 }
 
-export function fromLocalStorage(key, defaultValue) {
-  const value = localStorage.getItem(key)
-  if (isNil(value)) {
-    return defaultValue
-  }
-  return parse(value)
-}
+// export function fromLocalStorage(key, defaultValue) {
+//   const value = localStorage.getItem(key)
+//   if (isNil(value)) {
+//     return defaultValue
+//   }
+//   return parse(value)
+// }
 
 export function clipText(text, options = {}) {
   if (!text) {
@@ -131,7 +131,13 @@ export function clipText(text, options = {}) {
 }
 
 export function handleEvent(onChange, ...args) {
-  return event => onChange(event.target.value, ...args)
+  return event => {
+    event.preventDefault()
+    const value = event.target ? event.target.value : event
+    if (onChange) {
+      onChange(value, ...args)
+    }
+  }
 }
 
 export function arrayMutate(items, value, index) {

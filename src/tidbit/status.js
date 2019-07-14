@@ -3,12 +3,7 @@ import {Block} from 'baseui/block'
 import {Spinner} from 'baseui/spinner'
 import Check from 'baseui/icon/check'
 import Alert from 'baseui/icon/alert'
-
-export const STATUS = {
-  loading: 'loading',
-  success: 'success',
-  failure: 'failure'
-}
+import {STATUS} from 'tidbits/utils/status'
 
 export function Status({status}) {
   let Status
@@ -66,4 +61,8 @@ function Failure() {
       <Alert size="1.5rem" />
     </Block>
   )
+}
+
+export {
+  STATUS
 }
