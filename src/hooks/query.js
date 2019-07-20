@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {useMutation as useMutationBase} from 'graphql-hooks'
 import {STATUS} from 'tidbits/utils/status'
 
@@ -7,41 +7,67 @@ export function useMutation(query, options = {}) {
     throw new Error('Must supply a query to useMutation')
   }
   const {
-    variable,
-    onChange,
-    meta = {},
+    variables = {},
+    onMeta,
     ...baseOptions
   } = options
-  const [mutateBase, metaBase] = useMutationBase(query, baseOptions)
 
-  async function mutate(value, ...mutateArgs) {
-    if (onChange) {
-      onChange(makeChangeValue(variable, value, meta))
+  const [mutateBase, mutateMeta] = useMutationBase(query, baseOptions)
+  const [lastSuccess, setLastSuccess] = useState()
+
+  async function mutate(mutateVariables) {
+    const finalVariables = removeUndefined({
+      ...variables,
+      ...mutateVariables
+    })
+    console.debug(`Executing query: ${query}`)
+    console.debug('Variables: ', finalVariables)
+    if (onMeta) {
+      onMeta({
+        ...makeMeta(mutateMeta, lastSuccess),
+        status: STATUS.loading
+      })
     }
-    const response = await mutateBase(makeMutateValue(variable, value))
+    const response = await mutateBase({variables: finalVariables})
     try {
       checkForResponseError(response)
-    } catch (e) {
-      if (onChange) {
-        onChange({meta: {...meta, status: STATUS.failure}})
+    }
+    catch (e) {
+      if (onMeta) {
+        onMeta(makeMeta(mutateMeta, lastSuccess))
       }
       throw e
     }
-    if (onChange) {
-      onChange({meta: {...meta, status: STATUS.success}})
+    const newLastSuccess = new Date()
+    setLastSuccess(newLastSuccess)
+    if (onMeta) {
+      onMeta(makeMeta(response, newLastSuccess))
     }
     return response
   }
 
-  return [mutate, makeMeta(meta, metaBase)]
+  return [mutate, makeMeta(mutateMeta, lastSuccess)]
 }
 
-function makeChangeValue(variable, value, meta) {
-  return {value, meta: {...meta, status: STATUS.loading}}
+function makeMeta(mutateMeta, lastSuccess) {
+  return {
+    status: makeStatus(mutateMeta),
+    errors: mutateMeta.error ? makeAPIError(mutateMeta).data.errors : null,
+    lastSuccess
+  }
 }
 
-function makeMutateValue(variable, value) {
-  return variable ? {[variable]: value} : value
+function makeStatus(mutateMeta) {
+  if (mutateMeta.error) {
+    return STATUS.failure
+  }
+  if (mutateMeta.loading) {
+    return STATUS.loading
+  }
+  if (mutateMeta.error === false) {
+    return STATUS.success
+  }
+  return null
 }
 
 function checkForResponseError(response) {
@@ -64,23 +90,12 @@ class APIError extends Error {
   }
 }
 
-function makeMeta(currentMeta, mutateMeta) {
-  return {
-    ...currentMeta,
-    status: makeStatus(mutateMeta),
-    errors: mutateMeta.error ? makeAPIError(mutateMeta).data.errors : null
+function removeUndefined(object) {
+  const newObject = {}
+  for (const key of Object.keys(object)) {
+    if (object[key] !== undefined) {
+      newObject[key] = object[key]
+    }
   }
-}
-
-function makeStatus(mutateMeta) {
-  if (mutateMeta.error) {
-    return STATUS.failure
-  }
-  if (mutateMeta.loading) {
-    return STATUS.loading
-  }
-  if (mutateMeta.error === false) {
-    return STATUS.success
-  }
-  return null
+  return newObject
 }

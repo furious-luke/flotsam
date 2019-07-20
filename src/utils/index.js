@@ -1,4 +1,5 @@
 // import {parse, stringify} from 'flatted/esm'
+import parseDate from 'date-fns/parse'
 
 export function identity(value) {
   return value
@@ -14,6 +15,23 @@ export function isFunc(value) {
 
 export function isArray(value) {
   return Array.isArray(value)
+}
+
+export function isInt(value) {
+  return Number.isInteger(value)
+}
+
+export function isObject(value) {
+  return typeof value === 'object' && value !== null
+}
+
+export function toDate(value) {
+  if (isString(value)) {
+    return parseDate(value)
+  }
+  else {
+    return value
+  }
 }
 
 export function callIfFunc(value) {
@@ -132,7 +150,9 @@ export function clipText(text, options = {}) {
 
 export function handleEvent(onChange, ...args) {
   return event => {
-    event.preventDefault()
+    if (event.preventDefault) {
+      event.preventDefault()
+    }
     const value = event.target ? event.target.value : event
     if (onChange) {
       onChange(value, ...args)

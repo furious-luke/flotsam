@@ -8,10 +8,7 @@ jest.mock('graphql-hooks', () => ({
 }))
 
 test('fails with missing query', () => {
-  useMutationBase.mockImplementation(() => [
-    async () => ({}),
-    {}
-  ])
+  updateUseMutationMock(async () => ({}))
   expect(() => {
     const {result} = renderHook(() => useMutation())
     const hook = result.current
@@ -19,10 +16,7 @@ test('fails with missing query', () => {
 })
 
 test('mutate value', async () => {
-  useMutationBase.mockImplementation(() => [
-    async () => ({}),
-    {}
-  ])
+  updateUseMutationMock(async () => ({}))
   const {result} = renderHook(
     () => useMutation('query{}')
   )
@@ -31,10 +25,7 @@ test('mutate value', async () => {
 })
 
 test('mutate value with variable', async () => {
-  useMutationBase.mockImplementation(() => [
-    async () => ({}),
-    {}
-  ])
+  updateUseMutationMock(async () => ({}))
   const {result} = renderHook(
     () => useMutation('query{}', {variable: 'name'})
   )
@@ -42,89 +33,85 @@ test('mutate value with variable', async () => {
   await mutate()
 })
 
-test('mutate value with onChange', async () => {
-  useMutationBase.mockImplementation(() => [
+test('mutate value with onMeta', async () => {
+  updateUseMutationMock(
     async value => {
       expect(value).toEqual('hello')
       return {}
-    },
-    {}
-  ])
-  let onChangeCalled = 0
+    }
+  )
+  let onMetaCalled = 0
   const {result} = renderHook(
     () => useMutation('query{}', {
-      onChange: ({value, meta}) => {
-        if (onChangeCalled == 0) {
-          onChangeCalled++
-          expect(value).toEqual('hello')
-          expect(meta.status).toEqual(STATUS.loading)
-        }
-        else if (onChangeCalled == 1) {
-          onChangeCalled++
-          expect(meta.status).toEqual(STATUS.success)
+      onMeta: meta => {
+        if (onMetaCalled == 0) {
+          onMetaCalled++
+          expect(meta.status).toBe(null)
         }
       }
     })
   )
   const [mutate] = result.current
   await mutate('hello')
-  expect(onChangeCalled).toEqual(2)
+  expect(onMetaCalled).toEqual(1)
 })
 
-test('mutate value with variable and onChange', async () => {
-  useMutationBase.mockImplementation(() => [
+test('mutate value with variable and onMeta', async () => {
+  updateUseMutationMock(
     async value => {
       expect(value).toEqual({name: 'hello'})
       return {}
-    },
-    {}
-  ])
-  let onChangeCalled = 0
+    }
+  )
+  let onMetaCalled = 0
   const {result} = renderHook(
     () => useMutation('query{}', {
       variable: 'name',
-      onChange: ({value, meta}) => {
-        if (onChangeCalled == 0) {
-          onChangeCalled++
-          expect(value).toEqual('hello')
-          expect(meta.status).toEqual(STATUS.loading)
-        }
-        else if (onChangeCalled == 1) {
-          onChangeCalled++
-          expect(meta.status).toEqual(STATUS.success)
+      onMeta: meta=> {
+        if (onMetaCalled == 0) {
+          onMetaCalled++
+          expect(meta.status).toBe(null)
         }
       }
     })
   )
   const [mutate] = result.current
   await mutate('hello')
-  expect(onChangeCalled).toEqual(2)
+  expect(onMetaCalled).toEqual(1)
 })
 
-test('errornous mutate value with onChange', async () => {
-  useMutationBase.mockImplementation(() => [
+test('errornous mutate value with onMeta', async () => {
+  updateUseMutationMock(
     async value => {
       expect(value).toEqual({name: 'hello'})
-      return {httpError: {body: 'error'}}
-    },
-    {}
-  ])
-  let onChangeCalled = 0
+      return {httpError: {body: '"error"'}, error: true}
+    }
+  )
+  let onMetaCalled = 0
   const {result} = renderHook(
     () => useMutation('query{}', {
       variable: 'name',
-      onChange: ({value, meta}) => {
-        if (onChangeCalled == 0) {
-          onChangeCalled++
-        }
-        else if (onChangeCalled == 1) {
-          onChangeCalled++
-          expect(meta.status).toEqual(STATUS.failure)
+      onMeta: meta => {
+        if (onMetaCalled == 0) {
+          onMetaCalled++
+          expect(meta.status).toBe(null)
         }
       }
     })
   )
   const [mutate] = result.current
-  await mutate('hello')
-  expect(onChangeCalled).toEqual(2)
+  // TODO: https://github.com/facebook/jest/issues/1700
+  let error
+  try {
+    await mutate('hello')
+  }
+  catch(e) {
+    error = e
+  }
+  expect(error).not.toBe(undefined)
+  expect(onMetaCalled).toEqual(1)
 })
+
+function updateUseMutationMock(mockCall) {
+  useMutationBase.mockImplementation(() => [mockCall, {}])
+}

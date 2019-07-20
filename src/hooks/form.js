@@ -1,8 +1,8 @@
 import {useState} from 'react'
-import {isEmpty, handleEvent} from 'tidbits/utils'
+import {isEmpty, handleEvent, identity} from 'tidbits/utils'
 
-export function useForm(initialValues = {}) {
-  const [values, setValues] = useState(initialValues)
+export function useForm(initialValues = {}, factory = identity) {
+  const [values, setValues] = useState(factory(initialValues))
 
   const valuesProxy = new Proxy(values, {get(target, name) {
     return (target[name] !== undefined) ? target[name] : ''

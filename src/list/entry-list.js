@@ -8,22 +8,27 @@ import Grab from 'baseui/icon/grab'
 import Delete from 'baseui/icon/delete'
 import {Block} from 'baseui/block'
 import {TextInput} from 'tidbits/tidbit/text-input'
-import {handleEvent, arrayMutate, arrayExtend} from 'tidbits/utils'
+import {handleEvent, arrayMutate, arrayExtend, isNil, isObject} from 'tidbits/utils'
 import {useArrayWithPlaceholder} from 'tidbits/hooks/array'
 
 export function EntryList({
   items = [],
   onChange,
   itemFactory,
-  itemComponent = Label
+  itemComponent = Label,
+  itemComponentProps
 }) {
   const [itemsWithPlaceholder, createPlaceholder] = useArrayWithPlaceholder(
     items, itemFactory, isItemEmpty
   )
   function handleChangeEntry(value, index) {
+    if (isNil(index)) {
+      throw new Error('EntryList requires both a value and index for onChange')
+    }
+    const valueObject = isObject(value) ? value : {content: value}
     const newItem = {
       ...itemsWithPlaceholder[index],
-      content: value
+      ...valueObject
     }
     onChange(arrayMutate(items, newItem, index))
     if (index == items.length) {
@@ -62,7 +67,8 @@ export function EntryList({
           component: itemComponent,
           props: {
             onChange: handleChangeEntry,
-            $listLength: itemsWithPlaceholder.length
+            $listLength: itemsWithPlaceholder.length,
+            ...(itemComponentProps || {})
           }
         },
         DragHandle: {

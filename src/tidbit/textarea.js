@@ -34,7 +34,8 @@ export function Textarea({value, status, lastSaved, onChange, ...props}) {
 function TextareaStatus({status, lastSaved}) {
   return (
     <Block $style={{
-      color: '#888',
+      color: '#777',
+      backgroundColor: '#f1f1f1',
       height: '1.5rem',
       paddingTop: '.5em',
       paddingBottom: '.5em',
@@ -44,7 +45,7 @@ function TextareaStatus({status, lastSaved}) {
       alignItems: 'center'
     }}>
       <Timestamp value={lastSaved} prefix="Saved" />
-      <Status status={status}/>
+      <Status status={status} />
     </Block>
   )
 }

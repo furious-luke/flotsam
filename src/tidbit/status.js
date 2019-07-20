@@ -45,6 +45,19 @@ function Success() {
       display="flex"
       alignItems="center"
       color="positive400"
+      $style={{
+        animationDuration: '1s',
+        animationDelay: '1s',
+        animationFillMode: 'forwards',
+        animationName: {
+          from: {
+            opacity: 1,
+          },
+          to: {
+            opacity: 0
+          }
+        }
+      }}
     >
       <Check size="1.5rem" />
     </Block>
