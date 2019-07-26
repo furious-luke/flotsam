@@ -1,5 +1,5 @@
 // import {parse, stringify} from 'flatted/esm'
-import parseDate from 'date-fns/parse'
+import parseISO from 'date-fns/parseISO'
 
 export function identity(value) {
   return value
@@ -27,7 +27,7 @@ export function isObject(value) {
 
 export function toDate(value) {
   if (isString(value)) {
-    return parseDate(value)
+    return parseISO(value)
   }
   else {
     return value

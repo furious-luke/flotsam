@@ -31,8 +31,21 @@ function TestMenu() {
   )
 }
 
+function TestLabel({item}) {
+  return (
+    <h2>{item.label}</h2>
+  )
+}
+
 storiesOf('List', module)
   .addDecorator(ShortDecorator)
   .add('Items with label', () => (
     <List items={items} contextMenu={TestMenu} />
+  ))
+  .add('Items with custom label', () => (
+    <List
+      items={items}
+      contextMenu={TestMenu}
+      labelComponent={TestLabel}
+    />
   ))

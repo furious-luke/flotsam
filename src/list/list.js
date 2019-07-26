@@ -12,7 +12,11 @@ export function List({items, emptyText, ...props}) {
           boxShadow: 'none'
         }}
       >
-        {items.map(item => <ListItem {...props} item={item} />)}
+        {
+          items.map((item, ii) => (
+            <ListItem {...props} key={ii} item={item} />
+          ))
+        }
       </StyledList>
     )
   } else {
@@ -31,7 +35,12 @@ export function List({items, emptyText, ...props}) {
   }
 }
 
-function ListItem({item, contextMenu: ContextMenu, ...props}) {
+function ListItem({
+  item,
+  contextMenu: ContextMenu,
+  labelComponent: LabelComponent = Label,
+  ...props
+}) {
   return (
     <Block
       display="flex"
@@ -50,7 +59,7 @@ function ListItem({item, contextMenu: ContextMenu, ...props}) {
         })}
         {...props}
       >
-        {item.label}
+        <LabelComponent item={item} />
       </StyledListItem>
       {
         ContextMenu && (
@@ -61,4 +70,8 @@ function ListItem({item, contextMenu: ContextMenu, ...props}) {
       }
     </Block>
   )
+}
+
+function Label({item = {}}) {
+  return <span>{item.label}</span>
 }
