@@ -78,6 +78,6 @@ function findActiveTab(tabs, path) {
   const pathSegment = firstPathSegment(path)
   return tabs.findIndex(tab => {
     const tabSegment = firstPathSegment(tab.link)
-    return tabSegment && tabSegment == pathSegment
+    return tabSegment == pathSegment
   })
 }

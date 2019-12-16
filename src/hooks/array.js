@@ -1,7 +1,12 @@
 import {useState} from 'react'
 import {arrayExtend} from 'tidbits/utils'
+import {isNullish} from 'tidbits/utils/primitives'
 
-export function useArrayWithPlaceholder(items, itemFactory, isItemEmpty) {
+export function useArrayWithPlaceholder(
+  items,
+  itemFactory = () => '',
+  isItemEmpty = isNullish
+) {
   function shouldCreatePlaceholder() {
     return !items || items.length == 0 || !isItemEmpty(items[items.length - 1])
   }

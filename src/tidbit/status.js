@@ -76,6 +76,16 @@ function Failure() {
   )
 }
 
+function isFailure(status) {
+  return status == STATUS.failure
+}
+
+function isLoading(status) {
+  return status == STATUS.loading
+}
+
 export {
-  STATUS
+  STATUS,
+  isFailure,
+  isLoading
 }

@@ -15,6 +15,7 @@ export function Header({
   tabs,
   activeTab,
   onTabChange,
+  navigation,
   overrides = {}
 }) {
   const [Avatar, avatarProps] = getOverrides(overrides.Avatar, AuthAvatar)
@@ -33,7 +34,9 @@ export function Header({
         }}
       >
         {Logo && <Logo />}
-        <NavigationList $align={ALIGN.center} />
+        <NavigationList $align={ALIGN.center}>
+          {navigation}
+        </NavigationList>
         <NavigationList $align={ALIGN.right}>
           <NavigationItem>
             <Avatar {...avatarProps} />

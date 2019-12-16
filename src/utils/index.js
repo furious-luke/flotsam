@@ -34,6 +34,14 @@ export function toDate(value) {
   }
 }
 
+export function toInt(value) {
+  if (isNil(value)) {
+    return value
+  } else {
+    return Number(value)
+  }
+}
+
 export function callIfFunc(value) {
   if (isFunc(value)) {
     return value()
@@ -181,4 +189,15 @@ export function firstPathSegment(path) {
 
 export function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms))
+}
+
+export function diffObjectsById(aObjects = [], bObjects = [], key = 'id') {
+  aObjects = aObjects.filter(o => !isNil(o))
+  bObjects = bObjects.filter(o => !isNil(o))
+  const aIds = new Set(aObjects.map(o => o[key]))
+  const bIds = new Set(bObjects.map(o => o[key]))
+  return {
+    create: [...bIds].filter(id => !aIds.has(id)).map(id => bObjects.find(o => o[key] === id)),
+    delete: [...aIds].filter(id => !bIds.has(id)).map(id => aObjects.find(o => o[key] === id))
+  }
 }

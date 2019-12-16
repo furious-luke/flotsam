@@ -3,7 +3,7 @@ import {Block} from 'baseui/block'
 import {StatefulMenu, StyledList, StyledListItem} from 'baseui/menu'
 import {ItemMenu} from './item-menu'
 
-export function List({items, emptyText, ...props}) {
+export function List({items, emptyText, onItemSelect, ...props}) {
   if (items.length) {
     return (
       <StyledList
@@ -14,7 +14,12 @@ export function List({items, emptyText, ...props}) {
       >
         {
           items.map((item, ii) => (
-            <ListItem {...props} key={ii} item={item} />
+            <ListItem
+              {...props}
+              key={ii}
+              item={item}
+              onClick={onItemSelect}
+            />
           ))
         }
       </StyledList>
@@ -39,6 +44,7 @@ function ListItem({
   item,
   contextMenu: ContextMenu,
   labelComponent: LabelComponent = Label,
+  onClick,
   ...props
 }) {
   return (
@@ -46,6 +52,7 @@ function ListItem({
       display="flex"
       alignItems="center"
       width="100%"
+      onClick={() => onClick(item)}
     >
       <StyledListItem
         $style={({$theme}) => ({

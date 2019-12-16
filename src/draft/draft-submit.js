@@ -3,7 +3,7 @@ import {Block} from 'baseui/block'
 import {Button, SIZE} from 'baseui/button'
 import {DraftTimestamp} from './draft-timestamp'
 
-export function DraftSubmit({loading, disabled, lastUpdated}) {
+export function DraftSubmit({onSubmit, loading, disabled, lastUpdated}) {
   return (
     <Block
       display="flex"
@@ -12,6 +12,7 @@ export function DraftSubmit({loading, disabled, lastUpdated}) {
       marginBottom="2rem"
     >
       <Button
+        onClick={onSubmit}
         isLoading={loading}
         disabled={disabled || loading}
         size={SIZE.compact}

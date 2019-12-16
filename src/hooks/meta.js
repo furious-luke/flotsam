@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 
-export function useMeta() {
-  const [meta, setMeta] = useState({})
+export function useMeta(initialMeta) {
+  const [meta, setMeta] = useState(initialMeta || {})
 
   function reduceMeta(newMeta) {
     setMeta({

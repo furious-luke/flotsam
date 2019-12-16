@@ -1,12 +1,12 @@
 import React from 'react'
 import {Input} from 'baseui/input'
-import {handleEvent} from 'tidbits/utils'
+import {preventDefault} from 'tidbits/utils/dom'
 import {Status, STATUS} from './status'
 
 export function TextInput({onChange, ...props}) {
   return (
     <Input
-      onChange={handleEvent(onChange)}
+      onChange={preventDefault(onChange)}
       error={props.status == STATUS.failure}
       disabled={props.status == STATUS.loading}
       overrides={{
