@@ -1,14 +1,12 @@
-import {useState, useEffect} from 'react'
-// import {useContextState} from 'constate'
+import {useState, useGlobal} from 'reactn'
 import {parse, stringify} from 'flatted/esm'
 
-export function useLocalStorage(key, initialValue, options = {}) {
-  // const useFunc = options.context ? useContextState : (k, v) => useState(v)
-  const useFunc = (k, v) => useState(v)
+export function useLocalStorage(key, options = {}) {
+  const useFunc = options.global ? (k, v) => useGlobal(k) : (k, v) => useState(v)
   function getStoredValue() {
     const storedValue = !options.disabled ? localStorage.getItem(key) : null
     if (storedValue === null) {
-      return initialValue
+      return options.initialValue
     } else {
       try {
         return parse(storedValue)

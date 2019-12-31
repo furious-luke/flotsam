@@ -1,4 +1,3 @@
-// import {parse, stringify} from 'flatted/esm'
 import parseISO from 'date-fns/parseISO'
 
 export function identity(value) {
@@ -136,14 +135,6 @@ export function notNil(value, defaultValue) {
 export function isEmpty(value) {
   return value === '' || isNil(value)
 }
-
-// export function fromLocalStorage(key, defaultValue) {
-//   const value = localStorage.getItem(key)
-//   if (isNil(value)) {
-//     return defaultValue
-//   }
-//   return parse(value)
-// }
 
 export function clipText(text, options = {}) {
   if (!text) {
