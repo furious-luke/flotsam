@@ -192,3 +192,11 @@ export function diffObjectsById(aObjects = [], bObjects = [], key = 'id') {
     delete: [...aIds].filter(id => !bIds.has(id)).map(id => aObjects.find(o => o[key] === id))
   }
 }
+
+
+export function signSwitch(anomaly, positive, negative) {
+  if (anomaly >= 0) {
+    return positive
+  }
+  return negative
+}
