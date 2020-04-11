@@ -1,5 +1,5 @@
 import React from 'react'
-import {Spinner} from 'baseui/spinner'
+import {StyledSpinnerNext as Spinner} from 'baseui/spinner'
 import {Block} from 'baseui/block'
 import {maybe} from '../utils/functional'
 
