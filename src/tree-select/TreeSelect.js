@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {Select} from 'baseui/select'
-import {Unstable_TreeView as TreeView} from 'baseui/tree-view'
+import {TreeView} from 'baseui/tree-view'
 import {StyledEmptyState} from 'baseui/menu'
 import {maybe} from '../utils/functional'
 import {isNil, toggleKey} from '../utils/primitives'
@@ -51,12 +51,13 @@ export function TreeSelect({
 }
 
 function TreeDropdown({items, onToggle, noResultsMsg, onItemSelect, ...props}) {
-  if (!items.length) {
+  const ungroupedItems = items.__ungrouped
+  if (!ungroupedItems.length) {
     return <StyledEmptyState>{noResultsMsg}</StyledEmptyState>
   }
   return (
     <TreeView
-      data={items}
+      data={ungroupedItems}
       onToggle={item => {
         if (hasChildren(item)) {
           maybe(onToggle)(item)
