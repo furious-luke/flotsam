@@ -1,6 +1,8 @@
 import React from 'react'
 import {styled} from 'baseui'
 
+import {deref} from 'tidbits/utils/primitives'
+
 export function Content({children, fullHeight, backgroundColor = null}) {
   return (
     <StyledContent
@@ -14,6 +16,8 @@ export function Content({children, fullHeight, backgroundColor = null}) {
   )
 }
 
-const StyledContent = styled('div', ({$theme}) => ({
-  ...$theme.layout.content
-}))
+const StyledContent = styled('div', ({$theme}) => {
+  return {
+    ...deref($theme, 'layout.content', {})
+  }
+})

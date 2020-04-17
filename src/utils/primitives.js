@@ -46,8 +46,10 @@ export function toggleKey(object, key) {
 
 export function deref(object, path, defaultValue) {
   let value = object
-  path
-    .split('.')
-    .forEach(p => value = value ? value[p] : value)
+  if (!isArray(path)) {
+    path = path
+      .split('.')
+  }
+  path.forEach(p => value = value ? value[p] : value)
   return (value !== undefined) ? value : defaultValue
 }

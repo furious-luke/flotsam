@@ -1,22 +1,26 @@
 import React from 'react'
-import useReactRouter from 'use-react-router'
+import {useNavigate, useLocation} from '@reach/router'
 import {Tabs, Tab} from 'baseui/tabs'
 import {TabBar} from 'baseui/tabs/styled-components'
+
 import {Content} from 'tidbits/layout/content'
 import {firstPathSegment, notNil} from 'tidbits/utils'
 
-export function HeaderTabs({tabs, onChange, ...props}) {
-  const {history, location} = useReactRouter()
-  const activeTab = notNil(props.activeTab, findActiveTab(tabs, location.pathname))
+export function HeaderTabs({tabs, onChange, pathDepth, ...props}) {
+  const navigate = useNavigate()
+  const location = useLocation()
+  const activeTab = notNil(props.activeTab, findActiveTab(tabs, location.pathname, pathDepth))
+
   function handleTabChange({activeKey}) {
     const tab = tabs[Number(activeKey)]
-    if (tab.link) {
-      history.push(tab.link)
+    if (tab.route) {
+      navigate(tab.route)
     }
     if (onChange) {
       onChange(activeKey)
     }
   }
+
   return (
     <Tabs
       activeKey={`${activeTab}`}
@@ -74,10 +78,10 @@ function ContentTabBar({children, ...props}) {
   )
 }
 
-function findActiveTab(tabs, path) {
-  const pathSegment = firstPathSegment(path)
+function findActiveTab(tabs, path, depth = 0) {
+  const pathSegment = firstPathSegment(path, depth)
   return tabs.findIndex(tab => {
-    const tabSegment = firstPathSegment(tab.link)
+    const tabSegment = firstPathSegment(tab.route)
     return tabSegment == pathSegment
   })
 }

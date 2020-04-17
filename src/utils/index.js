@@ -174,8 +174,16 @@ export function arrayExtend(items, optionalItem) {
   ]
 }
 
-export function firstPathSegment(path) {
-  return path.slice(1, path.indexOf('/', 1)) || null
+export function firstPathSegment(path, depth = 0) {
+  const _path = path || ''
+  const parts = _path.split('/')
+  if (_path && _path[0] == '/') {
+    return parts[depth + 1]
+  }
+  if (_path && _path[0] != '/') {
+    return parts[depth]
+  }
+  return ''
 }
 
 export function sleep(ms) {

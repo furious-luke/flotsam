@@ -1,6 +1,10 @@
 import {isEmpty} from './primitives'
 
-export function ensurePlaceholder(items, itemFactory = () => '', isItemEmpty = isEmpty) {
+export function ensurePlaceholder(items, options = {}) {
+  const {
+    itemFactory = () => '',
+    isItemEmpty = isEmpty
+  } = options
   function shouldStripPlaceholder(item) {
     return isItemEmpty(item)
   }

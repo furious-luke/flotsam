@@ -1,5 +1,5 @@
 import React from 'react'
-import useReactRouter from 'use-react-router'
+import {useNavigate} from '@reach/router'
 import {Card} from 'baseui/card'
 import {Block} from 'baseui/block'
 import {Button} from 'baseui/button'
@@ -18,13 +18,13 @@ export function CrudForm({
   cancelLabel = 'Cancel',
   children
 }) {
-  const {history} = useReactRouter()
+  const navigate = useNavigate()
   const verb = update ? 'Update' : 'Create'
   function handleSubmit() {
     if (submitTo) {
-      history.push(submitTo)
+      navigate(submitTo)
     } else {
-      history.goBack()
+      navigate(-1)
     }
   }
   return (

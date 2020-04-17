@@ -7,7 +7,9 @@ import {
 } from 'baseui/header-navigation'
 import {StyledLink as Link} from 'baseui/link'
 import {getOverrides} from 'baseui/helpers/overrides'
+
 import {AuthAvatar} from 'tidbits/auth-avatar'
+
 import {HeaderTabs} from './header-tabs'
 
 export function Header({
@@ -16,6 +18,7 @@ export function Header({
   activeTab,
   onTabChange,
   navigation,
+  pathDepth,
   overrides = {}
 }) {
   const [Avatar, avatarProps] = getOverrides(overrides.Avatar, AuthAvatar)
@@ -49,6 +52,7 @@ export function Header({
             tabs={tabs}
             activeTab={activeTab}
             onChange={onTabChange}
+            pathDepth={pathDepth}
           />
         )
       }

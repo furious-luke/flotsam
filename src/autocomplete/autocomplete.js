@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
 import {Select} from 'baseui/select'
-import {Spinner} from 'baseui/spinner'
+import {StyledSpinnerNext as Spinner} from 'baseui/spinner'
 import {Block} from 'baseui/block'
+
 import {preventDefault} from 'tidbits/utils/dom'
 import {maybe} from 'tidbits/utils/functional'
 import {isNullish, isArray} from 'tidbits/utils/primitives'
@@ -61,16 +62,20 @@ export function Autocomplete({
   )
 }
 
-function LoadingDropdown(props) {
-  return (
-    <Block
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-      padding="1.9em"
-      {...props}
-    >
-      <Spinner size={24} />
-    </Block>
-  )
+// TODO: this is a class component to prevent warnings from BaseWeb
+// about forwarding refs.
+class LoadingDropdown extends React.Component {
+  render() {
+    return (
+      <Block
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        padding="1.9em"
+        {...this.props}
+      >
+        <Spinner size={24} />
+      </Block>
+    )
+  }
 }

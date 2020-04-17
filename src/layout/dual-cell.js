@@ -1,8 +1,5 @@
 import React from 'react'
-import {
-  Unstable_Grid as Grid,
-  Unstable_Cell as Cell
-} from 'baseui/layout-grid'
+import {Grid, Cell} from 'baseui/layout-grid'
 
 import {matchChildren} from '../utils/components'
 

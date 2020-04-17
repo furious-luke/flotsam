@@ -8,7 +8,7 @@ const engine = new StyletronClient()
 export function Styletron({theme = LightTheme, children}) {
   return (
     <StyletronProvider value={engine}>
-      <BaseProvider theme={LightTheme}>
+      <BaseProvider theme={theme}>
         {children}
       </BaseProvider>
     </StyletronProvider>

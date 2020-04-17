@@ -22,8 +22,10 @@ import {isEmpty, handleEvent, identity} from 'tidbits/utils'
  *     </>
  *   )
  */
-export function useForm(initialValues = {}) {
+export function useForm(initialValues = {}, submitMutation) {
   const [values, setValues] = useState(initialValues)
+  const [loading, setLoading] = useState(false)
+  const [errors, setErrors] = useState()
   // By using a proxy I'm able to automatically convert undefined
   // values to empty strings to prevent React from complaining without
   // having to pollute the form data with empty string values when
@@ -44,9 +46,25 @@ export function useForm(initialValues = {}) {
       return handleEvent(value => updateValues({[name]: value}))
     },
   })
+  // Submit action. Submits the form using submitMutation.
+  async function submit() {
+    if (submitMutation) {
+      setLoading(true)
+      try {
+        await submitMutation(values)
+      }
+      catch (e) {
+        setErrors(e.errors || e)
+        throw e
+      }
+      finally {
+        setLoading(false)
+      }
+    }
+  }
   // Return the raw "updateValues" function so we are able to submit
   // multiple changes at once, if needed.
-  return [valuesProxy, updateValuesProxy, updateValues]
+  return [valuesProxy, updateValuesProxy, submit, {loading, errors}]
 }
 
 function updateTouched(state, initial, changed) {

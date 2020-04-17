@@ -1,10 +1,10 @@
 import React from 'react'
-import useReactRouter from 'use-react-router'
 import {Avatar} from 'baseui/avatar'
 import {StatefulMenu} from 'baseui/menu'
 import {StatefulPopover, PLACEMENT, TRIGGER_TYPE} from 'baseui/popover'
 import {Block} from 'baseui/block'
 import {styled} from 'baseui'
+
 import {handleEvent} from 'tidbits/utils'
 
 export function AuthAvatar({user, promptLink}) {
@@ -31,7 +31,6 @@ export function AuthAvatar({user, promptLink}) {
 }
 
 export function AuthPrompt({prompt, link}) {
-  const {history} = useReactRouter()
   return (
     <StyledAuthPrompt
       href="#"

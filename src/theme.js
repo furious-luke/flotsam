@@ -1,17 +1,23 @@
-import {createTheme, LightTheme, lightThemePrimitives} from 'baseui'
+import {createTheme, lightThemePrimitives} from 'baseui'
 
-export const overrides = {
+export const tidbitsThemePrimitives = {
+  ...lightThemePrimitives,
+  primaryA: '#3079ff',
+  primaryB: '#f9f9f9'
+}
+    
+
+export const tidbitsThemeOverrides = {
   colors: {
-    primary: '#3079ff',
-    header: '#4b4b4b',
-    background: '#f9f9f9'
+    background: '#f9f9f9',
+    separator: '#2c3e50'
   },
-  typography: {
-    ...LightTheme.typography,
-    menu: {
-      ...LightTheme.typography.font400
-    }
-  },
+  // typography: {
+  //   ...LightTheme.typography,
+  //   menu: {
+  //     ...LightTheme.typography.font400
+  //   }
+  // },
   layout: {
     content: {
       width: '61rem',
@@ -30,6 +36,6 @@ export const overrides = {
   }
 }
 
-const Theme = createTheme(lightThemePrimitives, overrides)
+const TidbitsTheme = createTheme(tidbitsThemePrimitives, tidbitsThemeOverrides)
 
-export default Theme
+export default TidbitsTheme
