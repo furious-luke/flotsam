@@ -28,6 +28,7 @@ export function Header({
         overrides={{
           Root: {
             style: ({$theme}) => ({
+              position: 'relative',
               backgroundColor: $theme.colors.header,
               paddingTop: 0,
               paddingRight: '1rem',
