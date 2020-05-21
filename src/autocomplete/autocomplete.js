@@ -2,9 +2,10 @@ import React, {useState} from 'react'
 import {Select} from 'baseui/select'
 import {StyledSpinnerNext as Spinner} from 'baseui/spinner'
 import {Block} from 'baseui/block'
+import {mergeOverrides} from 'baseui/helpers/overrides'
 
 import {preventDefault} from 'tidbits/utils/dom'
-import {maybe} from 'tidbits/utils/functional'
+import {maybe, identity} from 'tidbits/utils/functional'
 import {isNullish, isArray} from 'tidbits/utils/primitives'
 import {Status, STATUS, isFailure, isLoading} from 'tidbits/tidbit/status'
 import {useDebounce} from 'tidbits/hooks/debounce'
@@ -12,10 +13,11 @@ import {useDebounce} from 'tidbits/hooks/debounce'
 export function Autocomplete({
   value,
   onChange,
-  loadOptions,
+  loadOptions = identity,
   status,
   labelKey = 'label',
   valueKey = 'value',
+  overrides: autocompleteOverrides,
   ...props
 }) {
   const [options, setOptions] = useState([])
@@ -40,6 +42,15 @@ export function Autocomplete({
     }
   }
 
+  const overrides = mergeOverrides(
+    {
+      Dropdown: {
+        component: loading && LoadingDropdown
+      }
+    },
+    autocompleteOverrides
+  )
+
   return (
     <Select
       value={isNullish(value) ? value : (isArray(value) ? value : [value])}
@@ -52,11 +63,7 @@ export function Autocomplete({
       valueKey={valueKey}
       filterOptions={false}
       onInputChange={preventDefault(debounce(handleInputChange))}
-      overrides={{
-        Dropdown: {
-          component: loading && LoadingDropdown
-        }
-      }}
+      overrides={overrides}
       {...props}
     />
   )

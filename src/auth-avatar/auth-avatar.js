@@ -43,7 +43,7 @@ export function AuthPrompt({prompt, link}) {
 
 const StyledAuthPrompt = styled('a', ({$theme}) => ({
   ...$theme.typography.menu,
-  color: $theme.colors.background,
+  color: $theme.colors.primary,
   textDecoration: 'none',
   ':hover': {
     textDecoration: 'underline'

@@ -18,7 +18,7 @@ export function isEmpty(value) {
   if (isObject(value)) {
     return Object.keys(value).length === 0
   }
-  return isNullish(value)
+  return isNullish(value) || value === ''
 }
 
 export function isArray(value) {
@@ -27,6 +27,16 @@ export function isArray(value) {
 
 export function isNumber(value) {
   return !isNaN(value)
+}
+
+export function toArray(value) {
+  if (isEmpty(value)) {
+    return value
+  }
+  if (!isArray(value)) {
+    return [value]
+  }
+  return value
 }
 
 export function toString(value) {

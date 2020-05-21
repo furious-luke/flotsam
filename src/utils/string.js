@@ -4,3 +4,7 @@ export function countLabel(count, label, plural) {
   }
   return `${count} ${plural || (label + 's')}`
 }
+
+export function toCamelCase(string) {
+  return string.replace(/(\_\w)/g, m => m[1].toUpperCase())
+}

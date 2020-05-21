@@ -7,9 +7,10 @@ import {preventDefault, stopPropagation} from '../utils/dom'
 
 import {TO} from './constants'
 
-export function Link({children, to, onClick, ...props}) {
+export function Link({children, to, href, onClick, ...props}) {
   const navigate = useNavigate()
-  const _to = to === TO.back ? undefined : to
+  let _to = to || href
+  _to = _to === TO.back ? undefined : _to
   const _onClick = to === TO.back ? preventDefault(handleBack) : onClick
   const _as = to === TO.back ? undefined : RouterLink
   function handleBack() {

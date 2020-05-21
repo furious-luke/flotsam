@@ -1,9 +1,11 @@
-import {createTheme, lightThemePrimitives} from 'baseui'
+import {createTheme as createBaseTheme, lightThemePrimitives} from 'baseui'
+
+import {deref} from './utils/primitives'
 
 export const tidbitsThemePrimitives = {
-  ...lightThemePrimitives,
-  primaryA: '#3079ff',
-  primaryB: '#f9f9f9'
+  ...lightThemePrimitives
+  // primaryA: '#3079ff',
+  // primaryB: '#f9f9f9'
 }
     
 
@@ -12,12 +14,6 @@ export const tidbitsThemeOverrides = {
     background: '#f9f9f9',
     separator: '#2c3e50'
   },
-  // typography: {
-  //   ...LightTheme.typography,
-  //   menu: {
-  //     ...LightTheme.typography.font400
-  //   }
-  // },
   layout: {
     content: {
       width: '61rem',
@@ -33,6 +29,17 @@ export const tidbitsThemeOverrides = {
   },
   sizing: {
     separation: '1rem'
+  }
+}
+
+function createTheme(primitives, overrides) {
+  const BaseTheme = createBaseTheme(primitives, overrides)
+  return {
+    ...BaseTheme,
+    colors: {
+      ...BaseTheme.colors,
+      header: deref(overrides, 'colors.header', deref(BaseTheme, 'colors.background'))
+    }
   }
 }
 

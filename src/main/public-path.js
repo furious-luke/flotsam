@@ -5,5 +5,5 @@
 // should be an additional entrypoint?
 if (window.publicPath) {
   __webpack_public_path__ = window.publicPath
+  console.debug('Setting public path to: ', window.publicPath)
 }
-console.debug('Setting public path to: ', window.publicPath)

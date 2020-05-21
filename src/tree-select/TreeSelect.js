@@ -2,10 +2,13 @@ import React, {useState} from 'react'
 import {Select} from 'baseui/select'
 import {TreeView} from 'baseui/tree-view'
 import {StyledEmptyState} from 'baseui/menu'
+import {mergeOverrides} from 'baseui/helpers/overrides'
+
 import {maybe} from '../utils/functional'
-import {isNil, toggleKey} from '../utils/primitives'
+import {isNil, toggleKey, toArray} from '../utils/primitives'
 import {filterKey} from '../utils/filter'
 import {filterTree, transformTree, hasChildren} from '../utils/tree'
+
 import {useFuseSearch} from './hooks'
 
 export function TreeSelect({
@@ -15,6 +18,7 @@ export function TreeSelect({
   startFilter = '',
   startExpanded = {},
   value,
+  overrides: treeSelectOverrides = {},
   ...props
 }) {
   const [expanded, setExpanded] = useState(startExpanded)
@@ -29,23 +33,28 @@ export function TreeSelect({
   function onToggle(item) {
     setExpanded(toggleKey(expanded, item.id))
   }
+  const overrides = mergeOverrides(
+    {
+      StatefulMenu: {
+        component: TreeDropdown,
+        props: {
+          onToggle
+        }
+      }
+    },
+    treeSelectOverrides
+  )
+  // TODO: Need to flatten the options when passed in to the Select.
   return (
     <Select
-      {...props}
-      value={value}
+      value={toArray(value)}
       options={expandedOptions}
       onInputChange={handleInputChange}
       onChange={maybe(onChange)}
       filterOptions={null}
       noResultsMsg={filter.length > 2 ? 'No results' : '3 characters required ...'}
-      overrides={{
-        StatefulMenu: {
-          component: TreeDropdown,
-          props: {
-            onToggle
-          }
-        }
-      }}
+      overrides={overrides}
+      {...props}
     />
   )
 }
@@ -75,6 +84,12 @@ function TreeDropdown({items, onToggle, noResultsMsg, onItemSelect, ...props}) {
           style: {
             cursor: 'pointer'
           }
+        },
+        TreeLabel: {
+          style: ({$theme}) => ({
+            color: $theme.colors.contentPrimary,
+            cursor: 'pointer'
+          })
         }
       }}
     />

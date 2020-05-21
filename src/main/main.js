@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import {useStyletron} from 'baseui'
 
 import '../utils/debug'
+import './public-path'
 
 import {Styletron} from './styletron'
 import {GlobalStyles} from './GlobalStyles'

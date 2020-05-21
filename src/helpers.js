@@ -36,8 +36,8 @@ export function Stateful({
     handler = (...args) => handleChange(value, setValue, ...args)
   } else {
     handler = payload => {
-      if (payload.value !== undefined) {
-        setValue(payload.value)
+      if (payload !== undefined) {
+        setValue(payload)
       }
     }
   }
