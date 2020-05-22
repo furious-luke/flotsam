@@ -6,5 +6,8 @@ export function countLabel(count, label, plural) {
 }
 
 export function toCamelCase(string) {
+  if (!string) {
+    return string
+  }
   return string.replace(/(\_\w)/g, m => m[1].toUpperCase())
 }

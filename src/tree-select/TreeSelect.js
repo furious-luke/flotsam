@@ -1,23 +1,21 @@
 import React, {useState} from 'react'
-import {Select} from 'baseui/select'
 import {TreeView} from 'baseui/tree-view'
 import {StyledEmptyState} from 'baseui/menu'
 import {mergeOverrides} from 'baseui/helpers/overrides'
 
+import {Select} from '../Select'
 import {maybe} from '../utils/functional'
 import {isNil, toggleKey, toArray} from '../utils/primitives'
 import {filterKey} from '../utils/filter'
-import {filterTree, transformTree, hasChildren} from '../utils/tree'
+import {filterTree, transformTree, flattenLeaves, hasChildren} from '../utils/tree'
 
 import {useFuseSearch} from './hooks'
 
 export function TreeSelect({
   options,
-  onChange,
   filterFunc = filterKey,
   startFilter = '',
   startExpanded = {},
-  value,
   overrides: treeSelectOverrides = {},
   ...props
 }) {
@@ -30,6 +28,7 @@ export function TreeSelect({
   const filteredOptions = filter ? search(filter) : options
   const transformFunc = filter ? node => ({...node, isExpanded: true}) : node => ({...node, isExpanded: expanded[node.id]})
   const expandedOptions = transformTree(filteredOptions, transformFunc)
+  const leaves = flattenLeaves(expandedOptions)
   function onToggle(item) {
     setExpanded(toggleKey(expanded, item.id))
   }
@@ -38,19 +37,17 @@ export function TreeSelect({
       StatefulMenu: {
         component: TreeDropdown,
         props: {
-          onToggle
+          onToggle,
+          expandedOptions
         }
       }
     },
     treeSelectOverrides
   )
-  // TODO: Need to flatten the options when passed in to the Select.
   return (
     <Select
-      value={toArray(value)}
-      options={expandedOptions}
+      options={leaves}
       onInputChange={handleInputChange}
-      onChange={maybe(onChange)}
       filterOptions={null}
       noResultsMsg={filter.length > 2 ? 'No results' : '3 characters required ...'}
       overrides={overrides}
@@ -59,14 +56,14 @@ export function TreeSelect({
   )
 }
 
-function TreeDropdown({items, onToggle, noResultsMsg, onItemSelect, ...props}) {
+function TreeDropdown({items, expandedOptions, onToggle, noResultsMsg, onItemSelect, ...props}) {
   const ungroupedItems = items.__ungrouped
   if (!ungroupedItems.length) {
     return <StyledEmptyState>{noResultsMsg}</StyledEmptyState>
   }
   return (
     <TreeView
-      data={ungroupedItems}
+      data={expandedOptions}
       onToggle={item => {
         if (hasChildren(item)) {
           maybe(onToggle)(item)

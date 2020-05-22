@@ -3,7 +3,7 @@ export function isFunction(value) {
 }
 
 export function isObject(value) {
-  return typeof value === 'object' && value !== null
+  return !isArray(value) && typeof value === 'object' && value !== null
 }
 
 export function isNullish(value) {
@@ -55,6 +55,9 @@ export function toggleKey(object, key) {
 }
 
 export function deref(object, path, defaultValue) {
+  if (!path) {
+    return defaultValue
+  }
   let value = object
   if (!isArray(path)) {
     path = path

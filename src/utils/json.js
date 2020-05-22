@@ -1,4 +1,4 @@
-import {isObject} from './primitives'
+import {isObject, isArray} from './primitives'
 import {toCamelCase} from './string'
 
 export function jsonToCamelCase(json) {
@@ -8,6 +8,8 @@ export function jsonToCamelCase(json) {
       newJson[toCamelCase(key)] = jsonToCamelCase(json[key])
     })
     return newJson
+  } else if (isArray(json)) {
+    return json.map(jsonToCamelCase)
   }
   return json
 }
