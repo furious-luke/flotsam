@@ -66,3 +66,36 @@ export function deref(object, path, defaultValue) {
   path.forEach(p => value = value ? value[p] : value)
   return (value !== undefined) ? value : defaultValue
 }
+
+export function mergeObjects(a, b) {
+  let target = {}
+  Object.keys(a).forEach(k => {
+    const av = a[k]
+    const bv = b[k]
+    if (isObject(av) && isObject(bv)) {
+      target[k] = mergeObjects(av, bv)
+    } else if (bv === undefined) {
+      target[k] = av
+    } else {
+      target[k] = bv
+    }
+  })
+  return target
+}
+
+export function flattenObject(obj, prefix = '') {
+  let target = {}
+  Object.keys(obj).forEach(k => {
+    const path = `${prefix}${k}`
+    const value = obj[k]
+    if (isObject(value)) {
+      target = {
+        ...target,
+        ...flattenObject(value, path + '.')
+      }
+    } else {
+      target[path] = value
+    }
+  })
+  return target
+}
