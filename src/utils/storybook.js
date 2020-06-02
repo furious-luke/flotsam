@@ -32,7 +32,7 @@ export function GlobalState({state = {}, children}) {
   const [ready, setReady] = useState(false)
   useEffect(() => {
     resetGlobal()
-    setGlobal(state, s => setReady(true))
+    setGlobal(state, () => setReady(true))
   }, [])
   if (ready) {
     return children
