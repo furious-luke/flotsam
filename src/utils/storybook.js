@@ -45,3 +45,13 @@ export function withGlobal(state = {}) {
     <GlobalState state={state}>{storyFn()}</GlobalState>
   )
 }
+
+export function withPadding() {
+  return storyFn => (
+    <div
+      style={{margin: '50px'}}
+    >
+      {storyFn()}
+    </div>
+  )
+}
