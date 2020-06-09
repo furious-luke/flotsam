@@ -17,6 +17,7 @@ function TestWizard() {
       hook: () => true,
       modal: TestModal
     }
+  ]
   return (
     <Wizard modals={modals} />
   )
