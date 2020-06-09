@@ -1,7 +1,7 @@
 import React from 'react'
 import {Block} from 'baseui/block'
 import {Button, SIZE} from 'baseui/button'
-import {STATUS} from 'tidbits/utils/status'
+import {STATUS} from '../utils/status'
 
 export function Submit({label, status, disabled, error, ...props}) {
   const loading = status == STATUS.loading

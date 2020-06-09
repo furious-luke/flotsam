@@ -8,7 +8,7 @@ import {
 import {StyledLink as Link} from 'baseui/link'
 import {getOverrides} from 'baseui/helpers/overrides'
 
-import {AuthAvatar} from 'tidbits/auth-avatar'
+import {AuthAvatar} from '../auth-avatar'
 
 import {HeaderTabs} from './header-tabs'
 

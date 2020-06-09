@@ -3,8 +3,8 @@ import {useNavigate, useLocation} from '@reach/router'
 import {Tabs, Tab} from 'baseui/tabs'
 import {TabBar} from 'baseui/tabs/styled-components'
 
-import {Content} from 'tidbits/layout/content'
-import {firstPathSegment, notNil} from 'tidbits/utils'
+import {Content} from '../layout/content'
+import {firstPathSegment, notNil} from '../utils'
 
 export function HeaderTabs({tabs, onChange, pathDepth, ...props}) {
   const navigate = useNavigate()

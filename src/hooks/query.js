@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {useMutation as useMutationBase} from 'graphql-hooks'
-import {STATUS} from 'tidbits/utils/status'
+import {STATUS} from '../utils/status'
 
 export function useMutation(query, options = {}) {
   if (!query) {

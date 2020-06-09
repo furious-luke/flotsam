@@ -1,7 +1,9 @@
 import React from 'react'
 import {storiesOf} from '@storybook/react'
 import {StatefulMenu} from 'baseui/menu'
-import {ShortDecorator} from 'tidbits/helpers'
+
+import {ShortDecorator} from '../helpers'
+
 import {List} from './list'
 
 const items = [

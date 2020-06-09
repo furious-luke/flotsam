@@ -2,7 +2,9 @@ import React from 'react'
 import {storiesOf} from '@storybook/react'
 import {Block} from 'baseui/block'
 import {Card} from 'baseui/card'
-import {BackgroundDecorator} from 'tidbits/helpers'
+
+import {BackgroundDecorator} from '../helpers'
+
 import {SplitContent} from './split-content'
 import {VerticalSpacer} from './vertical-spacer'
 

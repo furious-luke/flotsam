@@ -1,5 +1,5 @@
 import React from 'react'
-import {Timestamp} from 'tidbits/timestamp'
+import {Timestamp} from '../timestamp'
 
 export function DraftTimestamp({value}) {
   return (

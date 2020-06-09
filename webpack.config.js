@@ -114,7 +114,7 @@ function getBaseConfig() {
         path.resolve(__dirname, 'node_modules')
       ],
       alias: {
-        tidbits: path.resolve(__dirname, 'src')
+        flotsam: path.resolve(__dirname, 'src')
       }
     },
     plugins: [

@@ -1,8 +1,8 @@
 import React from 'react'
 import {Block} from 'baseui/block'
 import {Textarea as BaseTextarea} from 'baseui/textarea'
-import {Timestamp} from 'tidbits/timestamp'
-import {handleEvent} from 'tidbits/utils'
+import {Timestamp} from '../timestamp'
+import {handleEvent} from '../utils'
 import {Status} from './status'
 
 export function Textarea({value, status, lastSaved, onChange, ...props}) {

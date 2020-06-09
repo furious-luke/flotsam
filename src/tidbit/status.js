@@ -3,7 +3,7 @@ import {Block} from 'baseui/block'
 import {Spinner} from 'baseui/spinner'
 import Check from 'baseui/icon/check'
 import Alert from 'baseui/icon/alert'
-import {STATUS} from 'tidbits/utils/status'
+import {STATUS} from '../utils/status'
 
 export function Status({status}) {
   let Status

@@ -1,5 +1,5 @@
 {
-  "name": "@furious.luke/tidbits",
+  "name": "flotsam",
   "version": "0.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -41,7 +41,7 @@
   "dependencies": {},
   "jest": {
     "moduleNameMapper": {
-      "^tidbits(.*)$": "<rootDir>/src/$1"
+      "^flotsam(.*)$": "<rootDir>/src/$1"
     },
     "setupFiles": [
       "./src/setup-tests.js"
@@ -53,11 +53,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/furious-luke/tidbits.git"
+    "url": "git+https://github.com/furious-luke/flotsam.git"
   },
   "author": "Luke Hodkinson <furious.luke@gmail.com>",
   "bugs": {
-    "url": "https://github.com/furious-luke/tidbits/issues"
+    "url": "https://github.com/furious-luke/flotsam/issues"
   },
-  "homepage": "https://github.com/furious-luke/tidbits#readme"
+  "homepage": "https://github.com/furious-luke/flotsam#readme"
 }

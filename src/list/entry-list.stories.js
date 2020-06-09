@@ -1,7 +1,7 @@
 import React from 'react'
 import uuidv4 from 'uuid/v4'
 import {storiesOf} from '@storybook/react'
-import {ShortDecorator, Stateful} from 'tidbits/helpers'
+import {ShortDecorator, Stateful} from '../helpers'
 import {EntryList} from './entry-list'
 
 function itemFactory(content = '') {

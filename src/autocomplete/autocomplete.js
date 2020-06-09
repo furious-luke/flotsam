@@ -4,11 +4,11 @@ import {StyledSpinnerNext as Spinner} from 'baseui/spinner'
 import {Block} from 'baseui/block'
 import {mergeOverrides} from 'baseui/helpers/overrides'
 
-import {preventDefault} from 'tidbits/utils/dom'
-import {maybe, identity} from 'tidbits/utils/functional'
-import {isNullish, isArray} from 'tidbits/utils/primitives'
-import {Status, STATUS, isFailure, isLoading} from 'tidbits/tidbit/status'
-import {useDebounce} from 'tidbits/hooks/debounce'
+import {preventDefault} from '../utils/dom'
+import {maybe, identity} from '../utils/functional'
+import {isNullish, isArray} from '../utils/primitives'
+import {Status, STATUS, isFailure, isLoading} from '../tidbit/status'
+import {useDebounce} from '../hooks/debounce'
 
 export function Autocomplete({
   value,

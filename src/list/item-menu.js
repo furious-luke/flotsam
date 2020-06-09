@@ -1,6 +1,6 @@
 import React from 'react'
 import {StatefulPopover, PLACEMENT, TRIGGER_TYPE} from 'baseui/popover'
-import {Braille} from 'tidbits/icons/braille'
+import {Braille} from '../icons/braille'
 
 export function ItemMenu({children}) {
   return (

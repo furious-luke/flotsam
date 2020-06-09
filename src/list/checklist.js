@@ -1,6 +1,7 @@
 import React from 'react'
 import {Block} from 'baseui/block'
-import {CheckItem} from 'tidbits/tidbit/check-item'
+
+import {CheckItem} from '../tidbit/check-item'
 
 export function Checklist({items, onChange}) {
   return (

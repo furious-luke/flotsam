@@ -7,9 +7,9 @@ import {
 import Grab from 'baseui/icon/grab'
 import Delete from 'baseui/icon/delete'
 import {Block} from 'baseui/block'
-import {TextInput} from 'tidbits/tidbit/text-input'
-import {handleEvent, arrayMutate, arrayExtend, isNil, isObject} from 'tidbits/utils'
-import {useArrayWithPlaceholder} from 'tidbits/hooks/array'
+import {TextInput} from '../tidbit/text-input'
+import {handleEvent, arrayMutate, arrayExtend, isNil, isObject} from '../utils'
+import {useArrayWithPlaceholder} from '../hooks/array'
 
 export function EntryList({
   items = [],

@@ -5,7 +5,7 @@ import {StatefulPopover, PLACEMENT, TRIGGER_TYPE} from 'baseui/popover'
 import {Block} from 'baseui/block'
 import {styled} from 'baseui'
 
-import {handleEvent} from 'tidbits/utils'
+import {handleEvent} from '../utils'
 
 export function AuthAvatar({user, promptLink}) {
   if (!user) {

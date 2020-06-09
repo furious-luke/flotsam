@@ -1,6 +1,6 @@
 import React from 'react'
 import {storiesOf} from '@storybook/react'
-import {Stateful, BackgroundDecorator} from 'tidbits/helpers'
+import {Stateful, BackgroundDecorator} from '../helpers'
 import {styled} from 'baseui'
 import {Header} from './header'
 

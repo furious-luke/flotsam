@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import {isEmpty, handleEvent, identity} from 'tidbits/utils'
+import {isEmpty, handleEvent, identity} from '../utils'
 
 /*
  * For when you need a really, really simple way to manage form

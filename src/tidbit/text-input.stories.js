@@ -1,6 +1,6 @@
 import React from 'react'
 import {storiesOf} from '@storybook/react'
-import {ShortDecorator, Stateful} from 'tidbits/helpers'
+import {ShortDecorator, Stateful} from '../helpers'
 import {TextInput} from './text-input'
 
 storiesOf('TextInput', module)

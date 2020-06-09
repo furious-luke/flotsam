@@ -1,6 +1,6 @@
 import {useState} from 'react'
-import {arrayExtend} from 'tidbits/utils'
-import {isNullish} from 'tidbits/utils/primitives'
+import {arrayExtend} from '../utils'
+import {isNullish} from '../utils/primitives'
 
 export function useArrayWithPlaceholder(
   items,

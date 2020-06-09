@@ -1,7 +1,7 @@
 import React from 'react'
 import {storiesOf} from '@storybook/react'
-import {ShortDecorator, Stateful} from 'tidbits/helpers'
-import {sleep} from 'tidbits/utils'
+import {ShortDecorator, Stateful} from '../helpers'
+import {sleep} from '../utils'
 import {Autocomplete} from './autocomplete'
 
 async function loadOptions() {

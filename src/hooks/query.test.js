@@ -1,6 +1,6 @@
 import {renderHook, act} from '@testing-library/react-hooks'
 import {useMutation as useMutationBase} from 'graphql-hooks'
-import {STATUS} from 'tidbits/utils/status'
+import {STATUS} from '../utils/status'
 import {useMutation} from './query'
 
 jest.mock('graphql-hooks', () => ({

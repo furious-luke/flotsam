@@ -1,6 +1,6 @@
 import React from 'react'
 import {storiesOf} from '@storybook/react'
-import {ShortDecorator, Stateful} from 'tidbits/helpers'
+import {ShortDecorator, Stateful} from '../helpers'
 import {Textarea} from './textarea'
 
 const TEXTAREA_VALUE = 'Hello world, this is a textarea.'

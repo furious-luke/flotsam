@@ -2,14 +2,14 @@ import {createTheme as createBaseTheme, lightThemePrimitives} from 'baseui'
 
 import {deref} from './utils/primitives'
 
-export const tidbitsThemePrimitives = {
+export const flotsamThemePrimitives = {
   ...lightThemePrimitives
   // primaryA: '#3079ff',
   // primaryB: '#f9f9f9'
 }
     
 
-export const tidbitsThemeOverrides = {
+export const flotsamThemeOverrides = {
   colors: {
     background: '#f9f9f9',
     separator: '#2c3e50'
@@ -43,6 +43,6 @@ function createTheme(primitives, overrides) {
   }
 }
 
-const TidbitsTheme = createTheme(tidbitsThemePrimitives, tidbitsThemeOverrides)
+const FlotsamTheme = createTheme(flotsamThemePrimitives, flotsamThemeOverrides)
 
-export default TidbitsTheme
+export default FlotsamTheme

@@ -1,6 +1,6 @@
 import React from 'react'
 import {storiesOf} from '@storybook/react'
-import {ShortDecorator} from 'tidbits/helpers'
+import {ShortDecorator} from '../helpers'
 import {DraftSubmit} from './draft-submit'
 
 const lastUpdated = new Date('December 17, 1995 03:24:00')

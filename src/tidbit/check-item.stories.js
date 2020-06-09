@@ -1,6 +1,6 @@
 import React from 'react'
 import {storiesOf} from '@storybook/react'
-import {ShortDecorator, Stateful} from 'tidbits/helpers'
+import {ShortDecorator, Stateful} from '../helpers'
 import {CheckItem} from './check-item'
 
 const item = {

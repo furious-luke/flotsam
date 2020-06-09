@@ -1,7 +1,7 @@
 import React from 'react'
 import {styled} from 'baseui'
 
-import {deref} from 'tidbits/utils/primitives'
+import {deref} from '../utils/primitives'
 
 export function Content({children, fullHeight, backgroundColor = null}) {
   return (
