@@ -96,3 +96,5 @@ extern
 
 # Loki; this folder should be pushed to S3 instead.
 .loki
+
+docs/

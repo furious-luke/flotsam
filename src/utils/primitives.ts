@@ -1,17 +1,29 @@
-export function isFunction(value) {
+/**
+ * Test if a variable is a function.
+ */
+export function isFunction(value: any): boolean {
   return value && {}.toString.call(value) === '[object Function]'
 }
 
-export function isObject(value) {
+/**
+ * Test if a variable is a primitive object.
+ */
+export function isObject(value: any): boolean {
   return !isArray(value) && typeof value === 'object' && value !== null
 }
 
-export function isNullish(value) {
+/**
+ * Test if a variable is undefined or null (nullish).
+ */
+export function isNullish(value: any): boolean {
   return value === undefined || value === null
 }
 
-export function isNil(value) {
-  return value === undefined || value === null
+/**
+ * Deprecated.
+ */
+export function isNil(value: any): boolean {
+  return isNullish(value)
 }
 
 export function isEmpty(value) {
@@ -21,7 +33,10 @@ export function isEmpty(value) {
   return isNullish(value) || value === ''
 }
 
-export function isArray(value) {
+/**
+ * Test if variable is an array.
+ */
+export function isArray(value: any): value is any[] {
   return Array.isArray(value)
 }
 
@@ -54,7 +69,20 @@ export function toggleKey(object, key) {
   })
 }
 
-export function deref(object, path, defaultValue) {
+/**
+ * Dereference an object type using a period separated path. This is
+ * the same as the null-propagation operator.
+ *
+ * @param object - The object to propagate into
+ * @param path - The properties to sequentially dereference
+ * @param defaultValue - A default value to return when a property does not exist
+ * @returns The dereferenced value or the default value
+ */
+export function deref(
+  object: object,
+  path: string | string[],
+  defaultValue?: any
+): any {
   if (!path) {
     return defaultValue
   }

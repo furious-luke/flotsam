@@ -5,7 +5,10 @@ export function countLabel(count, label, plural) {
   return `${count} ${plural || (label + 's')}`
 }
 
-export function toCamelCase(string) {
+/**
+ * Convert a snake-case string to camel-case.
+ */
+export function toCamelCase(string: string): string {
   if (!string) {
     return string
   }

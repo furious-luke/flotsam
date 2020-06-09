@@ -7,10 +7,10 @@
   },
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --mode development --progress --hot --env.hmr=true",
-    "build": "webpack --mode production --progress --colors --env.production=true",
+    "build": "tsc",
     "storybook": "start-storybook",
-    "test": "jest"
+    "test": "jest",
+    "docs": "typedoc --jsx react --out docs src"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.8.3",
@@ -18,7 +18,9 @@
     "@babel/preset-react": "^7.9.4",
     "@storybook/react": "^5.3.19",
     "babel-loader": "^8.1.0",
-    "jest": "^26.0.1"
+    "jest": "^26.0.1",
+    "typedoc": "^0.17.7",
+    "typescript": "^3.9.5"
   },
   "peerDependencies": {
     "@reach/router": "^1.3.3",
