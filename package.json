@@ -1,16 +1,17 @@
 {
   "name": "flotsam",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "main": "index.js",
+  "types": "index.d.ts",
   "license": "MIT",
   "scripts": {
     "storybook": "start-storybook",
     "test": "jest",
     "docs": "typedoc --jsx react --out docs src",
-    "build": "yarn clean && yarn copy",
+    "build": "yarn clean && yarn build:js && yarn build:ts && yarn copy:pkg",
     "clean": "rm -rf dist",
-    "copy": "yarn copy:src && yarn copy:pkg",
-    "copy:src": "babel src --out-dir dist --copy-files --no-copy-ignored",
+    "build:js": "babel src --out-dir dist --extensions '.js,.jsx'",
+    "build:ts": "tsc",
     "copy:pkg": "cp package.json dist/"
   },
   "devDependencies": {
