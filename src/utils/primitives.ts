@@ -96,8 +96,8 @@ export function deref(
 }
 
 export function mergeObjects(a, b) {
-  let target = {}
-  Object.keys(a).forEach(k => {
+  let target = {...a}
+  Object.keys(b).forEach(k => {
     const av = a[k]
     const bv = b[k]
     if (isObject(av) && isObject(bv)) {
