@@ -149,10 +149,10 @@ export function clipText(text, options = {}) {
 
 export function handleEvent(onChange, ...args) {
   return event => {
-    if (event.preventDefault) {
+    if (event && event.preventDefault) {
       event.preventDefault()
     }
-    const value = event.target ? event.target.value : event
+    const value = (event && event.target) ? event.target.value : event
     if (onChange) {
       onChange(value, ...args)
     }

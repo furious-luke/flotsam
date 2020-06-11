@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {styled} from 'baseui'
-import {sleep} from '../utils'
+
+import {sleep} from './utils'
 
 export function ShortDecorator(storyFn) {
   return (
