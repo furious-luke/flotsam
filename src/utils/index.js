@@ -197,7 +197,7 @@ export function diffObjectsById(aObjects = [], bObjects = [], key = 'id') {
   const bIds = new Set(bObjects.map(o => o[key]))
   return {
     create: [...bIds].filter(id => !aIds.has(id)).map(id => bObjects.find(o => o[key] === id)),
-    delete: [...aIds].filter(id => !bIds.has(id)).map(id => aObjects.find(o => o[key] === id))
+    delete: [...aIds].filter(id => !bIds.has(id))
   }
 }
 

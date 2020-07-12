@@ -11,8 +11,8 @@ export function Link({children, to, href, onClick, ...props}) {
   const navigate = useNavigate()
   let _to = to || href
   _to = _to === TO.back ? undefined : _to
-  const _onClick = to === TO.back ? preventDefault(handleBack) : onClick
-  const _as = to === TO.back ? undefined : RouterLink
+  const _onClick = to === TO.back ? preventDefault(handleBack) : preventDefault(onClick)
+  const _as = (to === TO.back || !_to) ? undefined : RouterLink
   function handleBack() {
     navigate(-1)
   }
