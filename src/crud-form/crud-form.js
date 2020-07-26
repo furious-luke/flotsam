@@ -7,19 +7,21 @@ import {Button} from 'baseui/button'
 import {Form} from '../form'
 import {Link} from '../link'
 
+import {getCrudOptions} from './utils'
+
 export function CrudForm({
-  update,
+  operation = OPERATION.create,
   title,
   loading,
   submit,
   submitTo,
   cancelTo,
-  submitLabel = 'Save',
+  submitLabel,
   cancelLabel = 'Cancel',
   children
 }) {
   const navigate = useNavigate()
-  const verb = update ? 'Update' : 'Create'
+  const options = getCrudOptions(operation, submitLabel)
   function handleSubmit() {
     if (submitTo) {
       navigate(submitTo)
@@ -28,7 +30,7 @@ export function CrudForm({
     }
   }
   return (
-    <Card title={`${verb} ${title}`}>
+    <Card title={`${options.verb} ${title}`}>
       <Form>
         {children}
       </Form>
@@ -38,9 +40,10 @@ export function CrudForm({
           onClick={() => submit().then(handleSubmit)}
           disabled={loading}
           isLoading={loading}
+          color={options.submitColor}
           $style={{minWidth: '8rem'}}
         >
-          {submitLabel}
+          {options.submitLabel}
         </Button>
         <Link to={cancelTo || Link.TO.back}>{cancelLabel}</Link>
       </Block>

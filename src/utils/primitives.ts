@@ -127,3 +127,25 @@ export function flattenObject(obj, prefix = '') {
   })
   return target
 }
+
+export function stripUndefined(obj) {
+  const result = {}
+  for (const key of Object.keys(obj)) {
+    const value = obj[key]
+    if (value !== undefined) {
+      result[key] = value
+    }
+  }
+  return result
+}
+
+export function removeFromArrayById(array, value, key) {
+  const index = (array || []).findIndex(item => deref(item, key) == value)
+  if (index > -1) {
+    array = [
+      ...array.slice(0, index),
+      ...array.slice(index + 1)
+    ]
+  }
+  return array
+}

@@ -3,6 +3,7 @@ import {Modal as BaseModal, ModalHeader, ModalBody, ModalFooter, ModalButton} fr
 
 import {useToggle} from '../hooks/toggle'
 import {maybe} from '../utils/functional'
+import {stopPropagation} from '../utils/dom'
 
 export function Modal({
   initialOpen,
@@ -27,10 +28,11 @@ export function Modal({
   }
   return (
     <React.Fragment>
-      {trigger && React.cloneElement(trigger, {[triggerProp]: toggleOpen})}
+      {trigger && React.cloneElement(trigger, {[triggerProp]: stopPropagation(toggleOpen)})}
       <BaseModal
         onClose={childProps.onClose}
         isOpen={getOpen(open, forceOpen)}
+        unstable_ModalBackdropScroll
       >
         {children(childProps)}
       </BaseModal>

@@ -22,8 +22,11 @@ export function matchChildren(children, types, defaults) {
 }
 
 function getDefault(type, defaults = {}) {
-  if (defaults[type]) {
-    return defaults[type]()
+  if (defaults[type] !== undefined) {
+    if (defaults[type]) {
+      return defaults[type]()
+    }
+    return defaults[type]
   }
   return React.createElement(type)
 }

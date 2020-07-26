@@ -193,11 +193,11 @@ export function sleep(ms) {
 export function diffObjectsById(aObjects = [], bObjects = [], key = 'id') {
   aObjects = aObjects.filter(o => !isNil(o))
   bObjects = bObjects.filter(o => !isNil(o))
-  const aIds = new Set(aObjects.map(o => o[key]))
-  const bIds = new Set(bObjects.map(o => o[key]))
+  const aIds = new Set(aObjects.map(o => deref(o, key)))
+  const bIds = new Set(bObjects.map(o => deref(o, key)))
   return {
-    create: [...bIds].filter(id => !aIds.has(id)).map(id => bObjects.find(o => o[key] === id)),
-    delete: [...aIds].filter(id => !bIds.has(id))
+    create: [...bIds].filter(id => !aIds.has(id)).map(id => bObjects.find(o => deref(o, key) === id)),
+    delete: [...aIds].filter(id => !bIds.has(id)).map(id => aObjects.find(o => deref(o, key) === id)),
   }
 }
 

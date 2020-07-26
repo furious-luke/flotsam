@@ -4,7 +4,7 @@ import {StyledSpinnerNext as Spinner} from 'baseui/spinner'
 import {Block} from 'baseui/block'
 import {mergeOverrides} from 'baseui/helpers/overrides'
 
-import {preventDefault} from '../utils/dom'
+import {preventDefault, persistEvent} from '../utils/dom'
 import {maybe, identity} from '../utils/functional'
 import {isNullish, isArray} from '../utils/primitives'
 import {Status, STATUS, isFailure, isLoading} from '../tidbit/status'
@@ -34,6 +34,9 @@ export function Autocomplete({
   }
 
   async function handleInputChange(value) {
+    if (value && value.target) {
+      value = value.target.value
+    }
     setLoading(true)
     try {
       setOptions(await loadOptions(value))
@@ -62,7 +65,7 @@ export function Autocomplete({
       labelKey={labelKey}
       valueKey={valueKey}
       filterOptions={false}
-      onInputChange={preventDefault(debounce(handleInputChange))}
+      onInputChange={preventDefault(persistEvent(debounce(handleInputChange)))}
       overrides={overrides}
       {...props}
     />

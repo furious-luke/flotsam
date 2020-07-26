@@ -17,3 +17,10 @@ export function stopPropagation(func) {
 export function eventValue(func) {
   return event => maybe(func)(event.target.value)
 }
+
+export function persistEvent(func) {
+  return event => {
+    event.persist()
+    return maybe(func)(event)
+  }
+}

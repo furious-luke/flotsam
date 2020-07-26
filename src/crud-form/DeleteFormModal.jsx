@@ -8,24 +8,20 @@ import {Modal} from '../Modal'
 import {Link} from '../link'
 import {maybe} from '../utils/functional'
 
-import {OPERATION} from './constants'
-import {getCrudOptions} from './utils'
-
-export function CrudFormModal({
-  operation = OPERATION.create,
+export function DeleteFormModal({
   title,
   loading,
   submit,
-  submitLabel,
+  submitLabel = 'Delete',
   cancelLabel = 'Cancel',
   onClose,
   children
 }) {
   const navigate = useNavigate()
-  const options = getCrudOptions(operation)
+  const verb = update ? 'Update' : 'Create'
   return (
     <Form>
-      <Modal.Header>{`${options.verb} ${title}`}</Modal.Header>
+      <Modal.Header>{`${verb} ${title}`}</Modal.Header>
       <Modal.Body>
         {children}
       </Modal.Body>
@@ -41,10 +37,9 @@ export function CrudFormModal({
             onClick={() => submit().then(maybe(onClose))}
             disabled={loading}
             isLoading={loading}
-            color={options.submitColor}
             $style={{minWidth: '8rem'}}
           >
-            {options.submitLabel}
+            {submitLabel}
           </Button>
           <Link onClick={onClose}>{cancelLabel}</Link>
         </Block>
