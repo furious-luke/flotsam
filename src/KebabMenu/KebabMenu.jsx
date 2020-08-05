@@ -7,7 +7,7 @@ import Overflow from 'baseui/icon/overflow'
 import {maybe} from '../utils/functional'
 
 export function KebabMenu(props) {
-  const {items, onItemSelect} = props
+  const {items, onItemSelect, size = 20} = props
   const [css] = useStyletron()
   function handleSelect(item, close) {
     close()
@@ -30,7 +30,7 @@ export function KebabMenu(props) {
     >
       <Overflow
         className={css({cursor: 'pointer'})}
-        size={20}
+        size={size}
       />
     </StatefulPopover>
   )

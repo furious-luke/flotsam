@@ -46,10 +46,14 @@ export function withGlobal(state = {}) {
   )
 }
 
-export function withPadding() {
+export function withPadding(options) {
+  const {background} = options || {}
   return storyFn => (
     <div
-      style={{margin: '50px'}}
+      style={{
+        padding: '50px',
+        background
+      }}
     >
       {storyFn()}
     </div>

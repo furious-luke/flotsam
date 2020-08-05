@@ -7,7 +7,8 @@ import {preventDefault, stopPropagation} from '../utils/dom'
 
 import {TO} from './constants'
 
-export function Link({children, to, href, onClick, ...props}) {
+export function Link(props) {
+  const {children, to, href, onClick, ...restProps} = props
   const navigate = useNavigate()
   let _to = to || href
   _to = _to === TO.back ? undefined : _to
@@ -22,7 +23,7 @@ export function Link({children, to, href, onClick, ...props}) {
       to={_to}
       onClick={stopPropagation(_onClick)}
       href="#"
-      {...props}
+      {...restProps}
     >
       {children}
     </StyledLink>
