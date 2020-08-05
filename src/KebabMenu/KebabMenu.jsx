@@ -1,37 +1,18 @@
 import React from 'react'
 import {useStyletron} from 'baseui'
-import {StatefulPopover} from 'baseui/popover'
-import {StatefulMenu} from 'baseui/menu'
 import Overflow from 'baseui/icon/overflow'
 
-import {maybe} from '../utils/functional'
+import {PopupMenu} from '../PopupMenu'
 
 export function KebabMenu(props) {
   const {items, onItemSelect, size = 20} = props
   const [css] = useStyletron()
-  function handleSelect(item, close) {
-    close()
-    const {action} = item
-    if (action) {
-      action(item)
-    }
-    else {
-      maybe(onItemSelect)(item)
-    }
-  }
   return (
-    <StatefulPopover
-      content={({close}) => (
-        <StatefulMenu
-          items={items}
-          onItemSelect={({item}) => handleSelect(item, close)}
-        />
-      )}
-    >
+    <PopupMenu {...props}>
       <Overflow
         className={css({cursor: 'pointer'})}
         size={size}
       />
-    </StatefulPopover>
+    </PopupMenu>
   )
 }
