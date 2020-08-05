@@ -1,7 +1,6 @@
 import React from 'react'
 import {useNavigate, useLocation} from '@reach/router'
-import {Tabs, Tab} from 'baseui/tabs'
-import {TabBar} from 'baseui/tabs/styled-components'
+import {Tabs, Tab, StyledTabList} from 'baseui/tabs-motion'
 
 import {Content} from '../layout/content'
 import {firstPathSegment, notNil} from '../utils'
@@ -32,15 +31,21 @@ export function HeaderTabs({tabs, onChange, pathDepth, ...props}) {
             boxShadow: '0 2px 4px 0 rgba(204,204,204,0.5)'
           }
         },
-        TabBar: {
-          component: ContentTabBar,
+        TabBorder: {
           style: {
-            backgroundColor: 'white'
+            height: 0
           }
         },
-        TabContent: {
+        TabHighlight: {
           style: {
-            display: 'none'
+            height: '2px'
+          }
+        },
+        TabList: {
+          component: ContentTabList,
+          style: {
+            backgroundColor: 'white',
+            paddingBottom: 0
           }
         }
       }}
@@ -59,6 +64,11 @@ export function HeaderTabs({tabs, onChange, pathDepth, ...props}) {
                   paddingBottom: '.5em',
                   outline: 'none'
                 })
+              },
+              TabPanel: {
+                style: {
+                  display: 'none'
+                }
               }
             }}
           />
@@ -68,12 +78,12 @@ export function HeaderTabs({tabs, onChange, pathDepth, ...props}) {
   )
 }
 
-function ContentTabBar({children, ...props}) {
+function ContentTabList({children, ...props}) {
   return (
     <Content>
-      <TabBar {...props}>
+      <StyledTabList {...props}>
         {children}
-      </TabBar>
+      </StyledTabList>
     </Content>
   )
 }

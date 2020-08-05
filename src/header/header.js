@@ -29,6 +29,7 @@ export function Header({
           Root: {
             style: ({$theme}) => ({
               position: 'relative',
+              minHeight: '50px',
               backgroundColor: $theme.colors.header,
               paddingTop: 0,
               paddingRight: '1rem',
@@ -48,7 +49,7 @@ export function Header({
         </NavigationList>
       </HeaderNavigation>
       {
-        !!tabs && (
+        !!tabs && !!tabs.length && (
           <HeaderTabs
             tabs={tabs}
             activeTab={activeTab}
